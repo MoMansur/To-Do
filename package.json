@@ -1,0 +1,36 @@
+{
+  "name": "to-do",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack serve --open --config webpack.dev.js",
+    "build": "webpack --config webpack.prod.js",
+    "watch": "webpack --watch",
+    "gitScript": "git subtree push --prefix dist origin gh-pages"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MoMansur/To-Do.git"
+  },
+  "author": "Mansur Shehu",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MoMansur/To-Do/issues"
+  },
+  "homepage": "https://github.com/MoMansur/To-Do#readme",
+  "description": "",
+  "devDependencies": {
+    "express": "^4.19.2",
+    "webpack": "^5.92.1",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-middleware": "^7.2.1",
+    "webpack-dev-server": "^5.0.4",
+    "webpack-merge": "^5.10.0"
+  },
+  "dependencies": {
+    "bootstrap": "^5.3.3",
+    "css-loader": "^7.1.2",
+    "style-loader": "^4.0.0"
+  }
+}
