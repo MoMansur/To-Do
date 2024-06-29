@@ -10,16 +10,16 @@ settingsIcon.addEventListener('click', ()=>{
 })
 
 
-const addTaskBtn = document.getElementById('addTask')
-let isOn =  true
-addTaskBtn.addEventListener('click', ()=>{
-    if(isOn){
-        theDiv.appendChild(newProjectPopUpForm())
-    }else{
-       newProjectPopUpForm().remove()
-    }
-    isOn = !isOn
-})
+// const addTaskBtn = document.getElementById('addTask')
+// let isOn =  true
+// addTaskBtn.addEventListener('click', ()=>{
+//     if(isOn){
+//         theDiv.appendChild(newProjectPopUpForm())
+//     }else{
+//        newProjectPopUpForm().remove()
+//     }
+//     isOn = !isOn
+// })
 
 
 };

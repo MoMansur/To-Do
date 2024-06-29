@@ -50,7 +50,7 @@ export default function taskDOM(titleText, descriptionText, priorityText, dueDat
   const buttonGroup = document.createElement('div');
 
   const editButton = document.createElement('button');
-  editButton.className = 'btn btn-warning btn-sm';
+  editButton.className = 'btn btn-warning btn-sm m-2';
   editButton.innerHTML = '<i class="fas fa-edit"></i> Edit';
 
   const deleteButton = document.createElement('button');

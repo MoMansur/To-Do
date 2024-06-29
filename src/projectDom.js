@@ -56,7 +56,7 @@ const modal = (function() {
     // Save button
     const saveButton = document.createElement('button');
     saveButton.className = 'btn btn-primary';
-    saveButton.textContent = 'Save';
+    saveButton.textContent = 'Create Folder';
     modalBody.appendChild(saveButton);
   
     // Append all parts to modal content
@@ -79,16 +79,11 @@ const modal = (function() {
       addProjectUI(projectName)
 
 
-      function newArrayProject(newProject){
-        const newArray = [newProject]
-      }
     });
   
     // Function to close the modal
     function closeModal() {
       modalContainer.style.display = 'none';
-
-
     }
   
     // Function to open the modal
@@ -118,7 +113,8 @@ const modal = (function() {
     // Export modal functions
     return {
       openModal,
-      closeModal
+      closeModal,
+      addProjectUI,
     };
   })();
   

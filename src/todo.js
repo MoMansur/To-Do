@@ -1,62 +1,44 @@
-const taskSpace = document.getElementById('taskSpace')
+// Importing ProjectManager from projectManager.js
+import { ProjectManager } from "./projectManager.js";
 
-// import { v4 as uuidv4 } from 'uuid';
-import newProjectPopUpForm from "./taskForm.js";
-import taskDOM from "./todoDOM.js";
+// Create a new instance of ProjectManager and get the default project
+const newProjectManager = new ProjectManager();
+const newProject = newProjectManager.defaultProject;
 
-const taskArr = []
-
-export default class taskArray{
-    constructor (title, description, dueDate, priority){
-        // this.id = uuidv4()
-        this.title = title;
-        this.description = description;
-        this.dueDate = dueDate
-        this.priority = priority
+// Define a class for task arrays
+export default class TaskArray {
+  constructor(title, description, dueDate, priority) {
+    this.title = title;
+    this.description = description;
+    this.dueDate = dueDate;
+    this.priority = priority;
+  }
 }
 
-displayer(arr){
-    taskSpace.innerHTML = ""
-    arr.forEach(arrItem => {
-        taskDOM(arrItem.title, arrItem.description, arrItem.dueDate, arrItem.priority)
-    });
-    taskSpace.append(newProjectPopUpForm())
-    console.log(taskArr)
+function displayer(arr) {
+  arr.displayer();
 }
-}
-
-function displayer(arr){
-    taskSpace.innerHTML = ""
-    arr.forEach(arrItem => {
-        taskDOM(arrItem.title, arrItem.description, arrItem.dueDate, arrItem.priority)
-    });
-    taskSpace.append(newProjectPopUpForm())
-    
-}
-
 
 export function newTask(title, description, dueDate, priority) {
-    const theNewTask = new taskArray(title, description, dueDate, priority);
-    taskArr.push(theNewTask);
-    displayer(taskArr)
-    console.log(taskArr)
- 
+  const theNewTask = new TaskArray(title, description, dueDate, priority);
+  newProject.addTasks(theNewTask);
+  displayer(newProject);
 }
-
 
 export function deleteFunction(theCard) {
-    const indexAttribute = parseInt(theCard.getAttribute("data-index"));
-    var confirmToRemove = confirm('Are you sure you want to remove this Book?');
+  const indexAttribute = parseInt(theCard.getAttribute("data-index"));
+  const confirmToRemove = confirm('Are you sure you want to remove this task?');
 
-    if (confirmToRemove) {
-        taskArr.splice(indexAttribute, 1);
-        displayer(taskArr)
-        console.log(taskArr)
-    } else {
-      displayer(taskArr)
-      console.log(taskArr)
-
-    }
+  if (confirmToRemove) {
+    newProject.project.splice(indexAttribute, 1);
+    displayer(newProject);
+    console.log(newProject);
+  } else {
+    displayer(newProject);
+    console.log(newProject);
+  }
 }
 
-
+// Creating new tasks
+newTask('Task 1', 'This is a description for task 1', '2024-07-15', 'High');
+newTask('Task 2', 'This is a description for task 2', '2024-07-20', 'Medium');
