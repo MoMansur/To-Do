@@ -28,9 +28,7 @@
                 </a>
               </div>
 
-            <button class="addtasksidebar btn btn-success" id="addTask">
-                <i class="fa-solid fa-circle-plus"></i>
-                Add Task</button>
+          
             
                 <ul class="list-group" id="defaultItemsBox">
                     <li class="list-group-item" id="search">
@@ -57,15 +55,15 @@
                 <button class="btn btn-success" id="createNewProject">
                     <i class="fa-solid fa-circle-plus"></i>
                     Create new project</button>
-                <ul class="projectUL list-group">
+                <ul class="projectUL list-group" id="newProjectUL">
                         <li class="list-group-item">
-                          <i class="fa-solid fa-hashtag"></i> Project One
+                          <i class="fa-solid fa-hashtag"></i>  Routines
                         </li>
                         <li class="list-group-item">
-                          <i class="fa-solid fa-hashtag"></i> Project Two
+                          <i class="fa-solid fa-hashtag"></i> Workout Plan
                         </li>
                         <li class="list-group-item">
-                          <i class="fa-solid fa-hashtag"></i> Project Three
+                          <i class="fa-solid fa-hashtag"></i> Outdoor plans
                         </li>
                       </ul>
             </div>
@@ -74,7 +72,7 @@
         
         <div class="col-9">
           <div class="taskSpace" id="taskSpace">
-          <div class="todoDetails"></div>
+          <!-- <div class="todoDetails"></div> -->
   
           <div class="card task-card">
             <div class="row no-gutters">
@@ -99,7 +97,11 @@
                   </div>
                 </div>
               </div>
+              <button class="addtasksidebar btn btn-success m-2" id="addTask">
+                <i class="fa-solid fa-circle-plus"></i>
+                Add Task</button>
             </div>
+         
           </div>
    
         <script type="module" src="index.js"></script>

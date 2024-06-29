@@ -1,34 +1,17 @@
 const taskSpace = document.getElementById('taskSpace')
 
-import projectArray from "./localStorage.js"
-import newProjectPopUpForm from "./taskForm.js";
 
-// import './css/projectDOM.css';
+// import { v4 as uuidv4 } from 'uuid';
+import modal from "./projectDom.js";
 
+import todoFunctions from "./functions.js";
 
-import taskDOM from "./todoDOM.js";
-
-import createSettingsPage from "./settings.js";
+todoFunctions(taskSpace)
 
 
-const settingsIcon = document.getElementById('settingsIcon');
-const userName = document.getElementById('userName');
+const createNewProject = document.getElementById('createNewProject')
 
-settingsIcon.addEventListener('click', ()=>{
-    createSettingsPage(taskSpace, userName)
-
+createNewProject.addEventListener('click', ()=>{
+    modal.openModal()
 })
 
-
-const addTaskBtn = document.getElementById('addTask')
-
-let isOn =  true
-addTaskBtn.addEventListener('click', ()=>{
-    if(isOn){
-        taskSpace.append(newProjectPopUpForm())
-    }else{
-       newProjectPopUpForm().remove()
-    }
-    isOn = !isOn
-
-})

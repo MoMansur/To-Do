@@ -1,12 +1,20 @@
 import taskArray from "./todo.js"
 import { newTask } from "./todo.js"
 
+
 const projectsArr = new Array()
 
+class newProject{
+    constructor(id, ){
 
-function createNewProject(array){
-    projectsArr.push(taskArray)
-    taskArray.prototype.displayer()
-    console.log(projectsArr)
+    }
+} 
+
+
+export default function createNewProject(id, name){
+
+    const newProjectArr = new Array([id, name])
+    projectsArr.push(newProjectArr)
+
 }
 

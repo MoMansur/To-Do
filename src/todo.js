@@ -1,12 +1,14 @@
 const taskSpace = document.getElementById('taskSpace')
 
-const taskArr = []
-
+// import { v4 as uuidv4 } from 'uuid';
 import newProjectPopUpForm from "./taskForm.js";
 import taskDOM from "./todoDOM.js";
 
+const taskArr = []
+
 export default class taskArray{
     constructor (title, description, dueDate, priority){
+        // this.id = uuidv4()
         this.title = title;
         this.description = description;
         this.dueDate = dueDate
