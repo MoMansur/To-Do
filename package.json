@@ -5,7 +5,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack serve --open --config webpack.dev.js",
-    "build": "webpack --config webpack.prod.js",
+    "build": "webpack",
     "watch": "webpack --watch",
     "gitScript": "git subtree push --prefix dist origin gh-pages"
   },
@@ -21,7 +21,11 @@
   "homepage": "https://github.com/MoMansur/To-Do#readme",
   "description": "",
   "devDependencies": {
+    "@babel/core": "^7.24.7",
+    "@babel/preset-env": "^7.24.7",
+    "babel-loader": "^9.1.3",
     "express": "^4.19.2",
+    "html-webpack-plugin": "^5.6.0",
     "webpack": "^5.92.1",
     "webpack-cli": "^5.1.4",
     "webpack-dev-middleware": "^7.2.1",
@@ -32,6 +36,7 @@
     "@fortawesome/fontawesome-free": "^6.5.2",
     "bootstrap": "^5.3.3",
     "css-loader": "^7.1.2",
-    "style-loader": "^4.0.0"
+    "style-loader": "^4.0.0",
+    "uuid": "^10.0.0"
   }
 }

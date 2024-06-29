@@ -1,17 +1,18 @@
-import projectArray from "./localStorage.js"
-import newProjectPopUpForm from "./projectDOM.js";
+const taskSpace = document.getElementById('taskSpace')
 
-console.log(projectArray())
-console.log('hello')
+// import { ProjectManager } from "./projectManager.js";
+import modal from "./projectDom.js";
+
+import todoFunctions from "./functions.js";
+
+todoFunctions(taskSpace)
 
 
-// Assuming your 'createNewProject' button exists in your HTML
-const createNewProject = document.createElement('button')
+const createNewProject = document.getElementById('createNewProject')
 
-document.body.append(createNewProject)
-
-// Event listener for createNewProject button
 createNewProject.addEventListener('click', ()=>{
-    newProjectPopUpForm()
-    console.log('hello')
-});
+    modal.openModal()
+
+   
+})
+

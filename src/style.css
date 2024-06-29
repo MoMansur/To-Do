@@ -1,0 +1,211 @@
+
+#container{
+    min-height: 100vh;
+}
+
+.nav{
+    height: 70px;
+    background-color: lightblue;
+    border: 3px solid white;
+
+}
+.sidebar{
+    padding: 10px;
+    background-color: lightskyblue;
+    min-height: 98vh;
+    margin: 0px;
+    border-top-right-radius: 10px;
+}
+
+i{
+    font-size: 1.7rem;
+    margin: 5px;
+    
+}
+
+ul{
+    font-size: 2rem;
+}
+
+li{
+    list-style: none;
+    margin: 10px;
+    font-size: 1.5rem;
+    margin-left: 0px;
+    background-color: rgb(220, 246, 254);
+    cursor: pointer;
+}
+
+
+.list-group-item{
+    background-color: rgb(0, 68, 110);
+}
+#search{
+    background-color: lightblue;
+}
+
+#defaultItemsBox li{
+    background-color: rgb(220, 246, 254);
+    border: none;
+}
+#defaultItemsBox li:hover{
+    background-color:rgb(107, 210, 241);
+
+}
+#defaultItemsBox li:active{
+    background-color:rgb(107, 210, 241);
+
+}
+
+.projectItems{
+    background-color: rgb(13, 151, 151);
+    width: 100%;
+    margin-left: 0px;
+}
+.projectUL li{
+    background-color: rgb(220, 246, 254);
+    border: none;
+}
+
+.btn{
+    height: 50px;
+    font-weight: bolder;
+}
+
+#search{
+    height: 50px;
+}
+
+
+.user-nav {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    font-size: 1.8rem;
+    background-color: aliceblue;
+    border-radius: 5px;
+    margin-bottom: 10px;
+  }
+  .user-avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #1786e8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    
+    margin-right: 10px;
+  }
+  .user-name {
+    flex-grow: 1;
+  }
+
+  .projectSpace{
+    background-color: lightskyblue;
+    border: 1px solid black;
+    margin: 10px;
+    padding: 10px;
+    min-height: 80vh;
+    border-radius: 20px;
+  }
+
+  .task-card {
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .task-card .card-body {
+    padding: 15px;
+  }
+  
+  .task-card .card-title {
+    margin-bottom: 10px;
+  }
+  
+  .task-card .card-text {
+    margin-bottom: 5px;
+  }
+  
+  .task-card .card-text.description {
+    font-size: 1.1em;
+  }
+  
+  .task-card .card-text.priority {
+    font-size: 1.1em;
+  }
+  
+  .task-card .bg-primary {
+    background-color: #007bff !important;
+  }
+  
+  @media (max-width: 767px) {
+    .task-card .col-md-2 {
+      flex: 0 0 100%;
+      max-width: 100%;
+      text-align: center;
+      padding: 10px;
+    }
+  
+    .task-card .col-md-10 {
+      flex: 0 0 100%;
+      max-width: 100%;
+    }
+  }
+  #divForCheckBox{
+    background-color: #a8d0fb;
+    border: 1px solid black;
+    padding: 10px;
+    border-radius: 10px;
+
+  }
+
+/* 
+
+  .form-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    z-index: 1000;
+}
+
+.popup-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.popup-form label {
+    margin-top: 10px;
+}
+
+.popup-form input,
+.popup-form textarea,
+.popup-form select {
+    margin-top: 5px;
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+.popup-form button {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.popup-form button:hover {
+    background-color: #0056b3;
+} */
+
+

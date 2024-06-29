@@ -1,5 +1,7 @@
-import './css/projectDOM.css';
+// import './css/projectDOM.css';
 
+import { newTask } from "./todo.js";
+import taskDOM from "./todoDOM.js";
 
 // Function to create and show the new project popup form
 export default function newProjectPopUpForm() {
@@ -75,16 +77,17 @@ export default function newProjectPopUpForm() {
     // Append form to form container
     formContainer.appendChild(form);
 
-    // Append form container to body
-    document.body.appendChild(formContainer);
 
     // Add event listener to close the form on submit
     form.addEventListener('submit', (event) => {
         event.preventDefault();
-        formContainer.remove(); // Remove form on submission
         // Handle form submission logic here
+        newTask(titleInput.value, descriptionInput.value, prioritySelect.value, dueDateInput.value)
+        formContainer.remove(); 
+
     });
 
-    // Add CSS for the form (assumes you have appropriate styles in projectDOM.css)
+
+    return form
 }
 
