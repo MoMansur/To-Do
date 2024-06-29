@@ -6,6 +6,7 @@
 .nav{
     height: 70px;
     background-color: lightblue;
+    border: 3px solid white;
 
 }
 .sidebar{
@@ -13,6 +14,7 @@
     background-color: lightskyblue;
     min-height: 98vh;
     margin: 0px;
+    border-top-right-radius: 10px;
 }
 
 i{
@@ -89,4 +91,19 @@ li{
   }
   .user-name {
     flex-grow: 1;
+  }
+
+  .projectSpace{
+    background-color: lightskyblue;
+    border: 1px solid black;
+    margin: 10px;
+    padding: 10px;
+    min-height: 80vh;
+    border-radius: 20px;
+  }
+
+  .taskCard{
+    border: 1px solid white;
+    padding: 10px;
+    border-radius: 10px;
   }
