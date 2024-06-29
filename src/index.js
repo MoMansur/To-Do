@@ -1,18 +1,34 @@
+const taskSpace = document.getElementById('taskSpace')
 
 import projectArray from "./localStorage.js"
-import newProjectPopUpForm from "./projectDOM.js";
+import newProjectPopUpForm from "./taskForm.js";
 
-console.log(projectArray())
-console.log('hello')
+// import './css/projectDOM.css';
 
 
-// Assuming your 'createNewProject' button exists in your HTML
-const createNewProject = document.createElement('button')
+import taskDOM from "./todoDOM.js";
 
-document.body.append(createNewProject)
+import createSettingsPage from "./settings.js";
 
-// Event listener for createNewProject button
-createNewProject.addEventListener('click', ()=>{
-    newProjectPopUpForm()
-    console.log('hello')
-});
+
+const settingsIcon = document.getElementById('settingsIcon');
+const userName = document.getElementById('userName');
+
+settingsIcon.addEventListener('click', ()=>{
+    createSettingsPage(taskSpace, userName)
+
+})
+
+
+const addTaskBtn = document.getElementById('addTask')
+
+let isOn =  true
+addTaskBtn.addEventListener('click', ()=>{
+    if(isOn){
+        taskSpace.append(newProjectPopUpForm())
+    }else{
+       newProjectPopUpForm().remove()
+    }
+    isOn = !isOn
+
+})

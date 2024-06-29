@@ -1,9 +1,12 @@
+import { deleteFunction } from "./todo.js";
+
 const taskSpace = document.getElementById('taskSpace');
 
-export default function taskDOM(titleText, descriptionText, priorityText, dueDateText) {
+export default function taskDOM(titleText, descriptionText, priorityText, dueDateText, index) {
   // Create task card elements
   const card = document.createElement('div');
   card.className = 'card task-card';
+  card.setAttribute('data-index', index)
 
   const row = document.createElement('div');
   row.className = 'row no-gutters';
@@ -96,4 +99,8 @@ export default function taskDOM(titleText, descriptionText, priorityText, dueDat
 
   // Append card to container
   taskSpace.appendChild(card);
+
+  deleteButton.addEventListener('click', ()=>{
+    deleteFunction(card)
+  })
 }
