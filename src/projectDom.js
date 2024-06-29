@@ -57,6 +57,7 @@ const modal = (function() {
     // Save button
     const saveButton = document.createElement('button');
     saveButton.className = 'btn btn-primary';
+    saveButton.id = 'saveBtnNewProject'
     saveButton.textContent = 'Create Folder';
     modalBody.appendChild(saveButton);
   
@@ -96,6 +97,8 @@ const modal = (function() {
     function addProjectUI(projectName, index){
       const listItem = document.createElement('li');
       listItem.className = 'list-group-item';
+      listItem.id = 'projectFolder'
+      
       listItem.setAttribute('data-index', index)
       // Create an icon element
       const icon = document.createElement('i');
@@ -116,6 +119,7 @@ const modal = (function() {
       openModal,
       closeModal,
       addProjectUI,
+      saveButton,
     };
   })();
   

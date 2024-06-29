@@ -1,9 +1,13 @@
 import modal from "./projectDom.js"
 import { Project } from "./project.js"
 
-import { projectFunctionDisplayer } from "./index.js"
+// import { projectFunctionDisplayer } from "./index.js"
 
-export class ProjectManager{
+
+const taskSpace = document.getElementById('taskSpace')
+
+
+export default class ProjectManager{
   constructor(){
     this.defaultProject = new Project(1, 'Default')
     this.newProject = new Project()
@@ -21,21 +25,49 @@ export class ProjectManager{
     }
 
     
+    getProjects(){
+      const projectFolder = document.querySelectorAll('#projectFolder')
 
-    displayer(){ 
+      projectFolder.forEach((folderDom, index) =>{
+        folderDom.addEventListener('click', ()=>{
+          taskSpace.innerHTML = ""
+          const reBox = this.allProjectFolder[index]
+          console.log(reBox)
+          reBox.prototype.displayer()
+        })
+      })
+    }
+    displayer(index){ 
+      const button = document.createElement('button');
+      button.innerText = 'Add New Task';
+      button.id = 'addTaskButton';
+      button.className = 'btn btn-primary';
+      //   button.addEventListener('click', () => {
+      //   console.log('Add New Task button clicked!');
+      // });
+      
         this.allProjectFolder.forEach(project => {
-            modal.addProjectUI(project.name)          
+            taskSpace.innerHTML = ""
+           
+            modal.addProjectUI(project.name, index)  
+            taskSpace.append(button)        
         });
         console.log(this.allProjectFolder)
     }
+   
 }
 
 const myProjectManager = new ProjectManager();
+
+
 
 myProjectManager.newProjectFunc(2, 'Round 2');
 myProjectManager.newProjectFunc(3, 'Round 3');
 
 myProjectManager.displayer();
+myProjectManager.getProjects()
 
 
 // projectFunctionDisplayer(this.allProjectFolder)
+
+// createTask(myProjectManager)

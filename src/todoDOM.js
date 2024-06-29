@@ -1,9 +1,11 @@
-import { deleteFunction } from "./todo.js";
+// import { deleteFunction } from "./todo.js";
 
-const taskSpace = document.getElementById('taskSpace');
 
 export default function taskDOM(titleText, descriptionText, priorityText, dueDateText, index) {
   // Create task card elements
+  const taskSpace = document.getElementById('taskSpace');
+
+  
   const card = document.createElement('div');
   card.className = 'card task-card';
   card.setAttribute('data-index', index)

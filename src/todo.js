@@ -1,12 +1,10 @@
 // Importing ProjectManager from projectManager.js
-import { ProjectManager } from "./projectManager.js";
+import ProjectManager  from "./projectManager.js";
 
-// Create a new instance of ProjectManager and get the default project
-const newProjectManager = new ProjectManager();
-const newProject = newProjectManager.newProjectFunc()
+// // Create a new instance of ProjectManager and get the default project
 
 
-export default class Task{
+export class Task{
   constructor(title, description, dueDate, priority) {
     this.title = title;
     this.description = description;
@@ -15,20 +13,27 @@ export default class Task{
   }
 }
 
-function displayer(arr) {
-  arr.displayer();
+
+export default function createTask(newProjectManager){
+
+  const newProject = newProjectManager.newProjectFunc()
+
+  function displayer(arr) {
+    arr.displayer();
+  }
+  
+ function newTask(title, description, dueDate, priority) {
+    const theNewTask = new Task(title, description, dueDate, priority);
+    newProject.addTasks(theNewTask);
+    displayer(newProject);
+
+  }
+  
+  // Creating new tasks
+  newTask('Task 1', 'This is a description for task 1', '2024-07-15', 'High');
+  newTask('Task 2', 'This is a description for task 2', '2024-07-20', 'Medium');
+  
 }
-
-export function newTask(title, description, dueDate, priority) {
-  const theNewTask = new Task(title, description, dueDate, priority);
-  newProject.addTasks(theNewTask);
-  displayer(newProject);
-}
-
-// Creating new tasks
-newTask('Task 1', 'This is a description for task 1', '2024-07-15', 'High');
-newTask('Task 2', 'This is a description for task 2', '2024-07-20', 'Medium');
-
 
 export function deleteFunction(theCard) {
   const indexAttribute = parseInt(theCard.getAttribute("data-index"));

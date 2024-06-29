@@ -1,13 +1,15 @@
 import taskDOM from "./todoDOM.js"
 import newProjectPopUpForm from "./taskForm.js"
 
+import { Task } from "./todo.js"
 const taskSpace = document.getElementById('taskSpace')
 
 export class Project{
     constructor(id, name){
         this.id = id
         this.name = name
-        this.project = []   
+        this.project = []  
+        
     }  
     addTasks(arr){
         this.project.push(arr)
@@ -28,6 +30,16 @@ export class Project{
         this.project.splice(indexAttribute, 1);
         displayer()
     }
+
+  
+    newTask(title, description, dueDate, priority) {
+        const theNewTask = new Task(title, description, dueDate, priority);
+        this.addTasks(theNewTask);
+        displayer();
+    
+      }
+
+    
 }
 
 

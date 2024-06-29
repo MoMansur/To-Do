@@ -1,7 +1,7 @@
 // import './css/projectDOM.css';
 
-import { newTask } from "./todo.js";
-import taskDOM from "./todoDOM.js";
+// import { newTask } from "./todo.js";
+// import taskDOM from "./todoDOM.js";
 
 // Function to create and show the new project popup form
 export default function newProjectPopUpForm() {
