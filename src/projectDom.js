@@ -1,3 +1,4 @@
+
 // Create and export the modal as a default module
 const taskSpace = document.getElementById('taskSpace')
 const newProjectUL = document.getElementById('newProjectUL')
@@ -105,7 +106,7 @@ const modal = (function() {
       listItem.append(icon);
       listItem.append(projectName);
       
-
+    
     
       newProjectUL.append(listItem)
     }

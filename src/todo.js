@@ -3,10 +3,10 @@ import { ProjectManager } from "./projectManager.js";
 
 // Create a new instance of ProjectManager and get the default project
 const newProjectManager = new ProjectManager();
-const newProject = newProjectManager.defaultProject;
+const newProject = newProjectManager.newProjectFunc()
 
-// Define a class for task arrays
-export default class TaskArray {
+
+export default class Task{
   constructor(title, description, dueDate, priority) {
     this.title = title;
     this.description = description;
@@ -20,10 +20,15 @@ function displayer(arr) {
 }
 
 export function newTask(title, description, dueDate, priority) {
-  const theNewTask = new TaskArray(title, description, dueDate, priority);
+  const theNewTask = new Task(title, description, dueDate, priority);
   newProject.addTasks(theNewTask);
   displayer(newProject);
 }
+
+// Creating new tasks
+newTask('Task 1', 'This is a description for task 1', '2024-07-15', 'High');
+newTask('Task 2', 'This is a description for task 2', '2024-07-20', 'Medium');
+
 
 export function deleteFunction(theCard) {
   const indexAttribute = parseInt(theCard.getAttribute("data-index"));
@@ -39,6 +44,3 @@ export function deleteFunction(theCard) {
   }
 }
 
-// Creating new tasks
-newTask('Task 1', 'This is a description for task 1', '2024-07-15', 'High');
-newTask('Task 2', 'This is a description for task 2', '2024-07-20', 'Medium');

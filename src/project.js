@@ -20,11 +20,10 @@ export class Project{
             taskDOM(arrItem.title, arrItem.description, arrItem.dueDate, arrItem.priority)
         });
         taskSpace.append(newProjectPopUpForm())
-       
         console.log(array)
         return array
     }
-    deleteFunction(){
+    deleteTask(){
         const indexAttribute = parseInt(taskSpace.getAttribute("data-index"));
         this.project.splice(indexAttribute, 1);
         displayer()
