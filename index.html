@@ -8,15 +8,15 @@
     <link rel="stylesheet" href="../node_modules/@fortawesome/fontawesome-free/css/all.min.css"> 
 
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
-    <script defer src="./app.bundle.js"></script>
-</head>
+    <script defer src="index.js"></script>
+<script defer src="main.js"></script></head>
 <body>
     <div class="container-fluid" id="container">
         <div class="row">
-            <div class="nav">MY Todo-list</div>
+            <div class="nav bg-primary">MY Todo-list</div>
         </div>
     <div class="row">
-        <div class="sidebar col-3">
+        <div class="sidebar col-3 bg-primary">
         <div class="defaultItems">
             <div class="user-nav">
                 <div class="user-avatar">
@@ -72,7 +72,24 @@
         </div>
    
         
-        <div class="col-10"></div>
+        <div class="col-9">
+          <div class="projectSpace">
+          <div class="todoDetails"></div>
+          
+          <div class="taskCard">
+            <input type="checkbox" class="form-check-input">
+            <p id="Title"></p>
+            <p class="description"></p>
+            <span>Dates</span>
+            <span>Prioty</span>
+            <span>Project</span>
+          </div>
+          
+            
+
+          </div>
+        </div>
    
+        <script type="module" src="index.js"></script>
 </body>
 </html>
