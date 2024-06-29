@@ -5,7 +5,6 @@ module.exports = {
   mode: 'development',
   entry: {
     index: './src/index.js',
-    project: './src/project.js',
   },
   output: {
     filename: '[name].bundle.js', // Use [name] placeholder for dynamic filenames
