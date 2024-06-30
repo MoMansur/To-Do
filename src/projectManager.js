@@ -1,73 +1,51 @@
-import modal from "./projectDom.js"
-import { Project } from "./project.js"
-
-// import { projectFunctionDisplayer } from "./index.js"
-
-
 const taskSpace = document.getElementById('taskSpace')
 
+import Project from "./project.js"
 
 export default class ProjectManager{
   constructor(){
     this.defaultProject = new Project(1, 'Default')
     this.newProject = new Project()
-
     this.allProjectFolder =[]
     this.allTask = []
-
     this.newProjectFunc(1, 'Default');
   }
-   
     newProjectFunc(id, name) {
       this.newProject = new Project(id, name);
       this.allProjectFolder.push(this.newProject);
       return this.newProject;
     }
 
-    
-    getProjects(){
-      const projectFolder = document.querySelectorAll('#projectFolder')
-
-      projectFolder.forEach((folderDom, index) =>{
-        folderDom.addEventListener('click', ()=>{
-          taskSpace.innerHTML = ""
-          const reBox = this.allProjectFolder[index]
-          console.log(reBox)
-          reBox.prototype.displayer()
-        })
-      })
-    }
     displayer(index){ 
-      const button = document.createElement('button');
-      button.innerText = 'Add New Task';
-      button.id = 'addTaskButton';
-      button.className = 'btn btn-primary';
-      //   button.addEventListener('click', () => {
-      //   console.log('Add New Task button clicked!');
-      // });
-      
+      const newProjectUL = document.getElementById('newProjectUL')
+      newProjectUL.innerHTML = ""
+
         this.allProjectFolder.forEach(project => {
-            taskSpace.innerHTML = ""
+            taskSpace.innerHTML = ""            
+          
+            const listItem = document.createElement('li');
+            listItem.className = 'list-group-item';
+            listItem.id = 'projectFolder'
+            listItem.setAttribute('data-index', index)
+            const icon = document.createElement('i');
+            icon.className = 'fa-solid fa-hashtag';
+            listItem.append(icon);
+            listItem.append(project.name);
+
+         
+          
+            listItem.addEventListener('click', ()=>{
+              console.log('clciked', project.name )
+              let get  = project.project
+              Project.prototype.displayer(get)
+                
+            })
+            newProjectUL.append(listItem)
+         
+
            
-            modal.addProjectUI(project.name, index)  
-            taskSpace.append(button)        
         });
         console.log(this.allProjectFolder)
     }
-   
+  
 }
-
-const myProjectManager = new ProjectManager();
-
-
-
-myProjectManager.newProjectFunc(2, 'Round 2');
-myProjectManager.newProjectFunc(3, 'Round 3');
-
-myProjectManager.displayer();
-myProjectManager.getProjects()
-
-
-// projectFunctionDisplayer(this.allProjectFolder)
-
-// createTask(myProjectManager)
