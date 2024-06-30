@@ -1,37 +1,39 @@
 const taskSpace = document.getElementById('taskSpace')
 
-import ProjectManager from "./projectManager.js";
 import modal from "./projectDom.js";
-
 import todoFunctions from "./functions.js";
-import { Project } from "./project.js";
-
 todoFunctions(taskSpace)
 
-import createTask from './todo.js'
+import ProjectManager from "./projectManager.js";
+import Project from "./project.js";
 
-const newProjectManager = new ProjectManager();
 
-// createTask(newProjectManager)
 
-Project.prototype.newTask('Task 1', 'This is a description for task 1', '2024-07-15', 'High');
+const myProjectManager = new ProjectManager();
 
-export function projectFunctionDisplayer(arr){
-    for(let i=0; i<arr.length; i++){
-        
-    }
-}
+
+
+myProjectManager.displayer();
+
+
 
 const createNewProject = document.getElementById('createNewProject')
-
 createNewProject.addEventListener('click', ()=>{
     modal.openModal()
 })
 
-// const saveBtnNewProject = modal.saveButton
 
-// saveBtnNewProject.addEventListener('click', ()=>{
-//     ProjectManager.prototype.newProjectFunc()
-// })
+
+
+// const form = newProjectPopUpForm().form
+
+// form.addEventListener('submit', (e) => {
+//     e.preventDefault();
+    
+//     ProjectManager.prototype.newTask(titleInput.value, descriptionInput.value, prioritySelect.value, dueDateInput.value)
+    
+//     console.log('kkk')
+
+// });
 
 

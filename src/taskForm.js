@@ -1,7 +1,9 @@
 // import './css/projectDOM.css';
 
 // import { newTask } from "./todo.js";
-// import taskDOM from "./todoDOM.js";
+import Project from "./project.js";
+import ProjectManager from "./projectManager.js";
+import taskDOM from "./todoDOM.js";
 
 // Function to create and show the new project popup form
 export default function newProjectPopUpForm() {
@@ -78,16 +80,14 @@ export default function newProjectPopUpForm() {
     formContainer.appendChild(form);
 
 
-    // Add event listener to close the form on submit
-    form.addEventListener('submit', (event) => {
-        event.preventDefault();
-        // Handle form submission logic here
-        newTask(titleInput.value, descriptionInput.value, prioritySelect.value, dueDateInput.value)
-        formContainer.remove(); 
-
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        Project.prototype.collector(titleInput.value, descriptionInput.value, prioritySelect.value, dueDateInput.value)
+        
+           
     });
 
 
-    return form
+    return {form}
 }
 

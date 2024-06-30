@@ -72,16 +72,16 @@ const modal = (function() {
     });
   
     // Event listener for Save button (example)
-    saveButton.addEventListener('click', () => {
-      const projectName = nameInput.value;
-      const projectColor = colorSelect.value;
-      console.log(`Project Name: ${projectName}, Color: ${projectColor}`);
-      // Implement your save logic here
-      closeModal();
-      addProjectUI(projectName)
+    // saveButton.addEventListener('click', () => {
+    //   const projectName = nameInput.value;
+    //   const projectColor = colorSelect.value;
+    //   console.log(`Project Name: ${projectName}, Color: ${projectColor}`);
+    //   // Implement your save logic here
+    //   closeModal();
+    //   addProjectUI(projectName)
 
 
-    });
+    // });
   
     // Function to close the modal
     function closeModal() {
@@ -120,6 +120,8 @@ const modal = (function() {
       closeModal,
       addProjectUI,
       saveButton,
+      nameInput,
+      colorSelect,
     };
   })();
   

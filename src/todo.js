@@ -4,17 +4,20 @@ import ProjectManager  from "./projectManager.js";
 // // Create a new instance of ProjectManager and get the default project
 
 
-export class Task{
+export default class Task{
   constructor(title, description, dueDate, priority) {
     this.title = title;
     this.description = description;
     this.dueDate = dueDate;
     this.priority = priority;
   }
+  
 }
 
 
-export default function createTask(newProjectManager){
+export function createTask(theProject, array){
+
+  const newProjectManager = new ProjectManager()
 
   const newProject = newProjectManager.newProjectFunc()
 

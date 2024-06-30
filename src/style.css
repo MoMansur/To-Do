@@ -76,6 +76,15 @@ li{
     height: 50px;
 }
 
+#deleteProject i:hover{
+  background-color: red;
+  color: red;
+}
+
+.projectUL li:hover{
+  background-color: rgb(146, 200, 218);
+  border-radius: 5px;
+}
 
 .user-nav {
     display: flex;
