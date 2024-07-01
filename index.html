@@ -9,11 +9,20 @@
 
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
     <script defer src="index.js"></script>
-<script defer src="index.bundle.js"></script></head>
+<script defer src="index.bundle.js"></script><script defer src="project.bundle.js"></script></head>
 <body>
     <div class="container-fluid" id="container">
         <div class="row">
-            <div class="nav bg-primary">MY Todo-list</div>
+            <div class="nav bg-primary">
+              <span id="sidebarIcon">
+                <i class="fa-solid fa-bars"></i>
+              </span>
+              <h1 class="" style="text-align: center;color: white;">MY Todo-list</h1>
+
+              <span>
+                <i class="fa-solid fa-bars"></i>
+              </span>
+            </div>
         </div>
     <div class="row">
         <div class="sidebar col-3 bg-primary">
@@ -31,6 +40,8 @@
           
             
                 <ul class="list-group" id="defaultItemsBox">
+                  <button class="btn btn-success" id="addtasksidebar">Add Task</button>
+
                     <li class="list-group-item" id="search">
                       <i class="fa-solid fa-bars"></i>
                        All Todos
@@ -56,12 +67,7 @@
                     <i class="fa-solid fa-circle-plus"></i>
                     Create new project</button>
                 <ul class="projectUL list-group" id="newProjectUL">
-                        <li class="list-group-item">
-                          <i class="fa-solid fa-hashtag"></i>  Routines
-                        </li>
-                        <li class="list-group-item">
-                          <i class="fa-solid fa-hashtag"></i> Workout Plan
-                        </li>
+                        
                         <li class="list-group-item">
                           <i class="fa-solid fa-hashtag"></i> Outdoor plans
                         </li>
