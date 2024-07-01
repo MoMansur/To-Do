@@ -4,11 +4,10 @@ import Project from "./project.js"
 import modal from "./projectDom.js"
 import { displayTaskSpace } from "./index.js"
 import { loadProjectsFromLocalStorage, saveProjectsToLocalStorage } from './localStorage.js'
-
+import newProjectPopUpForm from "./taskForm.js"
 
 export default class ProjectManager{
   constructor(){
-    this.defaultProject = new Project(0, 'Default', 'white')
     this.newProject = []
     this.allProjectFolder = []
     this.loadProjects();
@@ -29,25 +28,23 @@ export default class ProjectManager{
   }
 
 
-    addNewProject(id, name, color) {
-      this.newProject = new Project(id, name, color);
-      this.allProjectFolder.push(this.newProject);
-      this.saveProjects();
-      return this.newProject;
-    }
+  addNewProject(id, name, color) {
+    this.newProject = new Project(id, name, color);
+    this.allProjectFolder.push(this.newProject);
+    this.saveProjects();
+    return this.newProject;
+  }
 
   displayer() {  
     this.allProjectFolder.forEach((project) => {
      this.domCreator()
     });
-    
-    console.log(this.allProjectFolder)
   }
 
   deleteProject(index) {
     this.allProjectFolder = this.allProjectFolder.filter((_, i) => i !== index);
     this.saveProjects();
-    this.displayer(); // Update the display after deletion
+    this.displayer(); 
   }
   
   
@@ -55,6 +52,7 @@ export default class ProjectManager{
     this.liCreate(this.allProjectFolder);
     this.saveButton(this.allProjectFolder);
     displayTaskSpace(this.allProjectFolder);
+
   }
 
   saveButton(project) {
@@ -92,7 +90,6 @@ export default class ProjectManager{
     listItem.addEventListener('click', () => {
       let getProjectArray = project.project;
       this.getSelectedProjectArray(getProjectArray);
-      Project.prototype.displayer(getProjectArray);
     });
     newProjectUL.append(listItem);
     })
@@ -101,8 +98,16 @@ export default class ProjectManager{
     getSelectedProjectArray(array){
       let selectArray = array
       console.log(selectArray)
+      this.refresher()
+      Project.prototype.displayer(selectArray);
+
+      taskSpace.append(newProjectPopUpForm(selectArray).form)
+      this.saveProjects()
+
       return selectArray
     }
+
+   
 
     refresher(){
       taskSpace.innerHTML = ""

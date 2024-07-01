@@ -15,34 +15,4 @@ export default class Task{
 }
 
 
-export function createTask(array, displayer){
-
-
-
-  
- function newTask(title, description, dueDate, priority) {
-    const theNewTask = new Task(title, description, dueDate, priority);
-    array.push(theNewTask);
-    displayer(array)
-  }
-  
-  // Creating new tasks
-  newTask('Task 1', 'This is a description for task 1', '2024-07-15', 'High');
-  newTask('Task 2', 'This is a description for task 2', '2024-07-20', 'Medium');
-  
-}
-
-export function deleteFunction(theCard) {
-  const indexAttribute = parseInt(theCard.getAttribute("data-index"));
-  const confirmToRemove = confirm('Are you sure you want to remove this task?');
-
-  if (confirmToRemove) {
-    newProject.project.splice(indexAttribute, 1);
-    displayer(newProject);
-    console.log(newProject);
-  } else {
-    displayer(newProject);
-    console.log(newProject);
-  }
-}
 

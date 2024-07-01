@@ -1,20 +1,11 @@
-// import './css/projectDOM.css';
-
-// import { newTask } from "./todo.js";
-import Project from "./project.js";
-import ProjectManager from "./projectManager.js";
-import taskDOM from "./todoDOM.js";
-
-// Function to create and show the new project popup form
-export default function newProjectPopUpForm() {
-    // Create form elements
+export default function newProjectPopUpForm(selectArray) {
     const formContainer = document.createElement('div');
     formContainer.classList.add('form-container');
 
     const form = document.createElement('form');
+    form.id = 'newTaskForm';
     form.classList.add('popup-form');
 
-    // Title
     const titleLabel = document.createElement('label');
     titleLabel.textContent = 'Title:';
     titleLabel.htmlFor = 'projectTitle';
@@ -24,7 +15,6 @@ export default function newProjectPopUpForm() {
     titleInput.name = 'title';
     titleInput.required = true;
 
-    // Description
     const descriptionLabel = document.createElement('label');
     descriptionLabel.textContent = 'Description:';
     descriptionLabel.htmlFor = 'projectDescription';
@@ -33,7 +23,6 @@ export default function newProjectPopUpForm() {
     descriptionInput.name = 'description';
     descriptionInput.required = true;
 
-    // Due Date
     const dueDateLabel = document.createElement('label');
     dueDateLabel.textContent = 'Due Date:';
     dueDateLabel.htmlFor = 'projectDueDate';
@@ -41,9 +30,7 @@ export default function newProjectPopUpForm() {
     dueDateInput.type = 'date';
     dueDateInput.id = 'projectDueDate';
     dueDateInput.name = 'dueDate';
-    dueDateInput.required = true;
 
-    // Priority
     const priorityLabel = document.createElement('label');
     priorityLabel.textContent = 'Priority:';
     priorityLabel.htmlFor = 'projectPriority';
@@ -54,18 +41,16 @@ export default function newProjectPopUpForm() {
 
     const priorityOptions = ['Low', 'Medium', 'High'];
     priorityOptions.forEach(optionText => {
-        const option = document.createElement('option');
-        option.value = optionText.toLowerCase();
-        option.textContent = optionText;
-        prioritySelect.appendChild(option);
+      const option = document.createElement('option');
+      option.value = optionText.toLowerCase();
+      option.textContent = optionText;
+      prioritySelect.appendChild(option);
     });
 
-    // Submit Button
     const submitButton = document.createElement('button');
     submitButton.type = 'submit';
     submitButton.textContent = 'Create Project';
 
-    // Append elements to form
     form.appendChild(titleLabel);
     form.appendChild(titleInput);
     form.appendChild(descriptionLabel);
@@ -76,18 +61,26 @@ export default function newProjectPopUpForm() {
     form.appendChild(prioritySelect);
     form.appendChild(submitButton);
 
-    // Append form to form container
     formContainer.appendChild(form);
 
-
     form.addEventListener('submit', (e) => {
-        e.preventDefault();
-        Project.prototype.collector(titleInput.value, descriptionInput.value, prioritySelect.value, dueDateInput.value)
-        
-           
-    });
+      e.preventDefault();
+      const title = titleInput.value;
+      const description = descriptionInput.value;
+      const dueDate = dueDateInput.value;
+      const priority = prioritySelect.value;
 
+      const collected = []
+     const theNewTask = {
+      title: title,
+      description: description,
+      dueDate: dueDate,
+      priority: priority
+   }
+   selectArray.push(theNewTask)  
+    console.log(collected)
+});
 
-    return {form}
-}
+    return { form };
+  }
 

@@ -6,7 +6,7 @@ todoFunctions(taskSpace)
 
 import ProjectManager from "./projectManager.js";
 import Project from "./project.js";
-import { createTask } from "./todo.js"
+
 
 const myProjectManager = new ProjectManager();
 myProjectManager.displayer()
@@ -94,20 +94,3 @@ export function displayTaskSpace(projects) {
    
   }
   
-  
-  
-  
-
-
-// const form = newProjectPopUpForm().form
-
-// form.addEventListener('submit', (e) => {
-//     e.preventDefault();
-    
-//     ProjectManager.prototype.newTask(titleInput.value, descriptionInput.value, prioritySelect.value, dueDateInput.value)
-    
-//     console.log('kkk')
-
-// });
-
-

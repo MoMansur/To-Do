@@ -1,9 +1,9 @@
-export const loadProjectsFromLocalStorage = () => {
-    const projects = localStorage.getItem('arr');
-    return projects ? JSON.parse(projects) : [];
-};
+export function loadProjectsFromLocalStorage() {
+    const data = localStorage.getItem('arr');
+    return data ? JSON.parse(data) : [];
+  }
   
-export const saveProjectsToLocalStorage = (projects) => {
+  export function saveProjectsToLocalStorage(projects) {
     localStorage.setItem('arr', JSON.stringify(projects));
-};
+  }
   
