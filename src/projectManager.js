@@ -2,6 +2,8 @@ const taskSpace = document.getElementById('taskSpace')
 
 import Project from "./project.js"
 import modal from "./projectDom.js"
+import { displayTaskSpace } from "./index.js"
+
 export default class ProjectManager{
   constructor(){
     this.defaultProject = new Project(1, 'Default')
@@ -9,7 +11,7 @@ export default class ProjectManager{
     this.allProjectFolder =[]
     this.allTask = []
 
-    this.addNewProject(1, 'Default');
+    this.addNewProject(1, 'Default').newTask('Task 2', 'This is a description for task 2', '2024-07-20', 'Medium')
   }
     addNewProject(id, name, color) {
       this.newProject = new Project(id, name, color);
@@ -18,43 +20,43 @@ export default class ProjectManager{
     }
 
   deleteProject(id) {
-    this.allProjectFolder = this.allProjectFolder.filter(project => project.id !== id);
+    this.allProjectFolder = this.allProjectFolder.filter(project => project.project.id !== id);
     this.displayer();
   }
  
 
   displayer() {
     const newProjectUL = document.getElementById('newProjectUL');
-    
-      this.allProjectFolder.forEach((project) => {
-        newProjectUL.innerHTML = ''
-      this.liCreate(project, 'white', project.name)
-      this.saveButtun(project)
-
-      
+    newProjectUL.innerHTML = "";
+  
+    this.allProjectFolder.forEach((project) => {
+      this.liCreate(project, 'white', project.name);
+      this.saveButton(project);
     });
-    console.log(this.allProjectFolder);
+  
+    displayTaskSpace(this.allProjectFolder);
   }
-   saveButtun(project,){
-
-    const saveBtnNewProject = modal.saveButton
-    saveBtnNewProject.addEventListener('click', ()=>{
-      const name = modal.nameInput.value
-      const color = modal.colorSelect
-      const id = this.allProjectFolder.length + 1
-      this.addNewProject(id, name, color.value)
-      console.log(this.allProjectFolder)
-       
-        this.liCreate(project, color, name)
-        modal.closeModal()
-  })
-   }
-
-   liCreate(project, color, name){
+  
+  saveButton(project) {
+    const saveBtnNewProject = modal.saveButton;
+    saveBtnNewProject.addEventListener('click', () => {
+      const name = modal.nameInput.value;
+      const color = modal.colorSelect.value;
+      const id = this.allProjectFolder.length + 1;
+      
+      this.addNewProject(id, name, color);
+      this.liCreate(project, color, name);
+      displayTaskSpace(this.allProjectFolder);
+   
+      modal.closeModal();
+      console.log(this.allProjectFolder, id)
+    });
+  }
+  
+  liCreate(project, color, name) {
     const newProjectUL = document.getElementById('newProjectUL');
 
-    
-
+  
     let id = this.allProjectFolder.length
 
       const listItem = document.createElement('li');
@@ -82,9 +84,9 @@ export default class ProjectManager{
       listItem.style.backgroundColor = color
 
       listItem.addEventListener('click', () => {
-        let get = project.project;
-        Project.prototype.displayer(get);
-        this.getSelectedProjectArray(get);
+        let getProjectArray = project.project;
+        Project.prototype.displayer(getProjectArray);
+        this.getSelectedProjectArray(getProjectArray);
       });
       newProjectUL.append(listItem);
      return listItem

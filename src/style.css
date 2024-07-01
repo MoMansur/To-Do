@@ -4,9 +4,25 @@
 }
 
 .nav{
-    height: 70px;
+    height: 90px;
     background-color: lightblue;
     border: 3px solid white;
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    margin-bottom: 30px;
+    display: inline-flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+h1{
+  text-align: center;
+  color: white;
+}
+
+#sidebarIcon{
+  color: white;
+  font-size: 2rem;
 
 }
 .sidebar{
@@ -58,7 +74,7 @@ li{
 }
 
 .projectItems{
-    background-color: rgb(13, 151, 151);
+    /* background-color: rgb(13, 151, 151); */
     width: 100%;
     margin-left: 0px;
 }

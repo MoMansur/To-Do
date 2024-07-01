@@ -15,21 +15,15 @@ export default class Task{
 }
 
 
-export function createTask(theProject, array){
+export function createTask(array, displayer){
 
-  const newProjectManager = new ProjectManager()
 
-  const newProject = newProjectManager.newProjectFunc()
 
-  function displayer(arr) {
-    arr.displayer();
-  }
   
  function newTask(title, description, dueDate, priority) {
     const theNewTask = new Task(title, description, dueDate, priority);
-    newProject.addTasks(theNewTask);
-    displayer(newProject);
-
+    array.push(theNewTask);
+    displayer(array)
   }
   
   // Creating new tasks

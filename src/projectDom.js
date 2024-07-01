@@ -1,4 +1,3 @@
-
 // Create and export the modal as a default module
 const taskSpace = document.getElementById('taskSpace')
 const newProjectUL = document.getElementById('newProjectUL')
@@ -71,17 +70,13 @@ const modal = (function() {
       modalContainer.style.display = 'none';
     });
   
-    // Event listener for Save button (example)
-    // saveButton.addEventListener('click', () => {
-    //   const projectName = nameInput.value;
-    //   const projectColor = colorSelect.value;
-    //   console.log(`Project Name: ${projectName}, Color: ${projectColor}`);
-    //   // Implement your save logic here
-    //   closeModal();
-    //   addProjectUI(projectName)
-
-
-    // });
+    saveButton.addEventListener('click', () => {
+      const projectName = nameInput.value;
+      const projectColor = colorSelect.value;
+      closeModal();
+   
+  
+    });
   
     // Function to close the modal
     function closeModal() {
@@ -94,31 +89,11 @@ const modal = (function() {
       taskSpace.append(modalContainer)
     }
   
-    function addProjectUI(projectName, index){
-      const listItem = document.createElement('li');
-      listItem.className = 'list-group-item';
-      listItem.id = 'projectFolder'
-      
-      listItem.setAttribute('data-index', index)
-      // Create an icon element
-      const icon = document.createElement('i');
-      icon.className = 'fa-solid fa-hashtag';
-      
-      
-      // Append the icon and text node to the list item
-      listItem.append(icon);
-      listItem.append(projectName);
-      
-    
-    
-      newProjectUL.append(listItem)
-    }
 
     // Export modal functions
     return {
       openModal,
       closeModal,
-      addProjectUI,
       saveButton,
       nameInput,
       colorSelect,

@@ -1,6 +1,6 @@
 import taskDOM from "./todoDOM.js"
 import newProjectPopUpForm from "./taskForm.js"
-import Task from "./todo.js";
+import Task, { createTask } from "./todo.js";
 
 
 const taskSpace = document.getElementById('taskSpace')
@@ -11,7 +11,8 @@ export default class Project {
       this.name = name;
       this.color = color
       this.project = [];
-      this.displayer(this.project)
+      
+
     }
 
     newTask(title, description, dueDate, priority) {
@@ -42,6 +43,7 @@ export default class Project {
       });
       taskSpace.append(newProjectPopUpForm().form);
       return array;
+
     }
       
     deleteTask(index) {
@@ -51,6 +53,10 @@ export default class Project {
       } else {
         console.error('Index out of bounds');
       }
+    }
+    createTaskCaller(arr){
+      return   createTask(this.project, this.displayer(this.project))
+
     }
   }
 
