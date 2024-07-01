@@ -6,16 +6,10 @@ todoFunctions(taskSpace)
 
 import ProjectManager from "./projectManager.js";
 import Project from "./project.js";
-import { createTask } from "./todo.js";
-
-
+import { createTask } from "./todo.js"
 
 const myProjectManager = new ProjectManager();
-
-
-myProjectManager.displayer();
-
-
+myProjectManager.displayer()
 
 
 
@@ -25,7 +19,7 @@ createNewProject.addEventListener('click', ()=>{
 })
 
 
-export function displayTaskSpace(projects, displayer) {
+export function displayTaskSpace(projects) {
     // Create the main container for the task space
     taskSpace.innerHTML = ""
 
@@ -37,7 +31,7 @@ export function displayTaskSpace(projects, displayer) {
   
     // Create and append the title
     const title = document.createElement('h2');
-    title.innerText = 'My Todos sProject';
+    title.innerText = 'My Todos Project';
 
     
     homePage.appendChild(title);
@@ -66,9 +60,8 @@ export function displayTaskSpace(projects, displayer) {
             e.stopPropagation();
             console.log()
           });
-
-    listItem.appendChild(deleteIcon);
-    projectList.appendChild(listItem);
+        listItem.appendChild(deleteIcon);
+        projectList.appendChild(listItem);
 
     listItem.addEventListener('click', ()=>{
         const index = parseInt(listItem.getAttribute('data-index'))
@@ -81,9 +74,13 @@ export function displayTaskSpace(projects, displayer) {
 
     deleteIcon.addEventListener('click', ()=>{
             const indexAttribute = parseInt(listItem.getAttribute("data-index"));
-            projects.splice(indexAttribute, 1);
+            // projects.splice(indexAttribute, 1);
             
-            ProjectManager.prototype.refresher()
+            // console.log(projects)
+            // taskSpace.innerHTML = ''
+            // ProjectManager.prototype.displayer()
+
+            ProjectManager.prototype.deleteProject(indexAttribute)
     })
       
 
