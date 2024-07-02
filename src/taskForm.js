@@ -99,7 +99,8 @@ export default function newProjectPopUpForm(selectArray) {
         title: title,
         description: description,
         dueDate: dueDate,
-        priority: priority
+        priority: priority,
+        isCompleted: false
       };
 
       selectArray.push(theNewTask);

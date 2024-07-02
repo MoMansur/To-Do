@@ -27,6 +27,7 @@ export default class ProjectManager{
 
   saveProjects() {
     saveProjectsToLocalStorage(this.allProjectFolder);
+    // console.log(this.allProjectFolder)
   }
 
 

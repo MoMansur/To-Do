@@ -31,6 +31,7 @@ h1{
     min-height: 98vh;
     margin: 0px;
     border-top-right-radius: 10px;
+    /* display: none; */
 }
 
 i{
@@ -231,19 +232,98 @@ li{
 }
 
 
+#titleContainer{
+  display: flex;
+  flex-direction: column;
+  height: 100px;
+}
 
 
-
-#titleDiv{
-  background-color: #1786e8;
-  height: 60px;
-  border-radius: 5px;
-  color: white;
+.label-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
   padding: 10px;
-  text-align: center;
+  color: rgb(255, 210, 210);
+  border-top: 1px solid #909090; ;
+  height: 20px;
+  line-height: 10px;
+  font-size: 1.1rem;
+  /* background-color: #b9b9b9; */
+  /* border: 1px solid #dee2e6; */
+  /* border-radius: 5px; */
+}
+
+.label {
+  margin-right: 15px;
+  font-weight: bold;
+}
+
+#buttonContainer{
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+
+#elementContainer{
+  padding: 10px;
+  font-size: 1.5rem;
+}
+
+#carddescription{
+  display: flex;
+  flex-wrap:  wrap;
 
 }
 
-#cardTitleFont{
-  font-size: 2rem; 
+.checkbox-span{
+  background-color: lightgray;
+  display: flex;
+  padding: 5px;
+  height: 60px;
+  border-radius: 5px;
+}
+
+
+.element-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 10px;
+}
+
+.card-text.description {
+  word-wrap: break-word;
+  border: 1px solid olive;
+ 
+}
+
+.big-checkbox {
+  margin-right: 15px;
+}
+
+.priority-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 5px;
+  height: 100%;
+}
+
+.checkbox-span {
+  display: flex;
+  align-items: center;
+}
+
+.label-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.label {
+  margin-right: 15px;
 }
