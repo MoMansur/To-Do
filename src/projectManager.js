@@ -1,4 +1,7 @@
 const taskSpace = document.getElementById('taskSpace')
+const space = document.getElementById('space')
+const title = document.getElementById('title')
+
 
 import Project from "./project.js"
 import modal from "./projectDom.js"
@@ -38,18 +41,17 @@ export default class ProjectManager{
     this.domCreator()
   }
 
-  deleteProject(index) {
-    this.allProjectFolder.splice(index, 1);    
-    this.saveProjects();
-    this.displayer(); 
-  }
-  
-  
   domCreator(){
     this.projectPageandSideBarDOM(this.allProjectFolder);
     this.saveButton(this.allProjectFolder);
   }
 
+  deleteProject(index) {
+    this.allProjectFolder.splice(index, 1);    
+    this.saveProjects();
+    this.projectPageandSideBarDOM(this.allProjectFolder);
+  }
+  
   saveButton(project) {
     const saveBtnNewProject = modal.saveButton;
     saveBtnNewProject.addEventListener('click', () => {
@@ -65,38 +67,39 @@ export default class ProjectManager{
 
     getSelectedProjectArray(array){
       let selectArray = array
-      console.log(selectArray)
-      this.refresher()
-      Project.prototype.displayer(selectArray);
-      taskSpace.append(newProjectPopUpForm(selectArray).form)
+      this.selectedArrayDisplay(selectArray)
+    
       this.saveProjects()
       return selectArray
     }
 
     refresher(){
-      taskSpace.innerHTML = ""
-      this.displayer()
+      space.innerHTML = ""
+      // this.displayer()
+    }
+
+    selectedArrayDisplay(selectArray){ 
+      space.append(newProjectPopUpForm(selectArray))
+      Project.prototype.displayer(selectArray);
+
+      const addTaskBtn = document.getElementById('addTaskButton')
+      addTaskBtn.addEventListener('click', ()=>{
+        const theForm = newProjectPopUpForm(selectArray)
+        space.append(theForm)
+        theForm.style.display = 'block'
+      })
+      console.log(selectArray)
     }
     //DOM
   projectPageandSideBarDOM(projects) {
     const newProjectUL = document.getElementById('newProjectUL');
     newProjectUL.innerHTML = ""
-    taskSpace.innerHTML = ""
-
-     // Create the main container for the task space
-     const homePage = document.createElement('div');
-     homePage.id = 'homePage';
-     homePage.style.padding = '20px';
-     homePage.style.border = '1px solid #ccc';
-     homePage.style.borderRadius = '5px';
+    space.innerHTML = ""
    
      // Create and append the title
-     const title = document.createElement('h2');
-     title.innerText = 'My Todos Project';
+     title.innerText = 'My Projects';
+     title.style.alignItems = 'center'
  
-     
-     homePage.appendChild(title);
-   
      // Create and append the list container
      const projectList = document.createElement('ul');
      projectList.style.listStyleType = 'none';
@@ -119,6 +122,7 @@ export default class ProjectManager{
     listItem.addEventListener('click', () => {
       let getProjectArray = project.project;
       this.getSelectedProjectArray(getProjectArray);
+      title.innerText =  project.name;
     })
 
       const listItemTaskSpace = document.createElement('li');
@@ -126,6 +130,7 @@ export default class ProjectManager{
       listItemTaskSpace.style.padding = '10px';
       listItemTaskSpace.style.borderBottom = '1px solid #ccc';
       listItemTaskSpace.innerText = project.name;
+
       listItemTaskSpace.setAttribute('data-index', index);
 
         const deleteIcon = document.createElement('i');
@@ -145,6 +150,8 @@ export default class ProjectManager{
         listItemTaskSpace.addEventListener('click', () => {
           let getProjectArray = project.project;
           this.getSelectedProjectArray(getProjectArray);
+          title.innerText =  project.name;
+
         })
 
 
@@ -154,10 +161,8 @@ export default class ProjectManager{
       this.saveProjects()
     });
     
-    homePage.appendChild(projectList);
-   
-    taskSpace.appendChild(homePage);
-    newProjectUL.append(listItem);
+    space.append(projectList);
+       newProjectUL.append(listItem);
 
     })
 

@@ -1,6 +1,6 @@
-// Create and export the modal as a default module
 const taskSpace = document.getElementById('taskSpace')
-const newProjectUL = document.getElementById('newProjectUL')
+const space = document.getElementById('space')
+
 
 const modal = (function() {
     // Modal container
@@ -86,7 +86,7 @@ const modal = (function() {
     // Function to open the modal
     function openModal() {
       modalContainer.style.display = 'block';
-      taskSpace.append(modalContainer)
+      space.append(modalContainer)
     }
   
 
