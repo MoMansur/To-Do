@@ -1,23 +1,50 @@
 // import { deleteFunction } from "./todo.js";
 
 
-export default function taskDOM(titleText, descriptionText, priorityText, dueDateText, index) {
+export default function taskDOM(titleText, descriptionText,  dueDateText,priorityText, index) {
   // Create task card elements
-  const taskSpace = document.getElementById('taskSpace');
+  const space = document.getElementById('space');
 
   
   const card = document.createElement('div');
-  card.className = 'card task-card';
+  card.className = 'card task-card mb-3';
   card.setAttribute('data-index', index)
 
   const row = document.createElement('div');
   row.className = 'row no-gutters';
 
-  const colIcon = document.createElement('div');
-  colIcon.className = 'col-md-2 d-flex align-items-center justify-content-center bg-primary text-white position-relative';
+    // Priority color indicator bar
+    const priorityBar = document.createElement('div');
+    priorityBar.className = 'priority-bar';
+    switch (priorityText.toLowerCase()) {
+      case 'low':
+        priorityBar.style.backgroundColor = '#28a745'; // Green for low priority
+        break;
+      case 'medium':
+        priorityBar.style.backgroundColor = '#ffc107'; // Yellow for medium priority
+        break;
+      case 'high':
+        priorityBar.style.backgroundColor = '#dc3545'; // Red for high priority
+        break;
+      default:
+        priorityBar.style.backgroundColor = '#6c757d'; // Gray for unknown priority
+        break;
+    }
 
-  const icon = document.createElement('i');
-  icon.className = 'fas fa-tasks fa-2x';
+
+  const titleContainer = document.createElement('div');
+  titleContainer.className = 'col-md-2 w-100 d-flex align-items-center justify-content-center  text-white position-relative';
+
+  const title = document.createElement('h2');
+  title.className = 'card-title';
+  title.textContent = titleText;
+
+
+  titleContainer.style.backgroundColor = priorityBar.style.backgroundColor;
+
+
+  titleContainer.appendChild(priorityBar);
+  titleContainer.append(title)
 
   const checkbox = document.createElement('input');
   checkbox.type = 'checkbox';
@@ -30,9 +57,6 @@ export default function taskDOM(titleText, descriptionText, priorityText, dueDat
   const cardBody = document.createElement('div');
   cardBody.className = 'card-body';
 
-  const title = document.createElement('h5');
-  title.className = 'card-title';
-  title.textContent = titleText;
 
   const description = document.createElement('p');
   description.className = 'card-text description';
@@ -62,6 +86,7 @@ export default function taskDOM(titleText, descriptionText, priorityText, dueDat
   const checkboxContainer = document.createElement('div');
   checkboxContainer.className = 'form-check';
   checkboxContainer.id = 'divForCheckBox';
+  checkboxContainer.style.backgroundColor = 'green'
 
   const taskCompletedCheckbox = document.createElement('input');
   taskCompletedCheckbox.className = 'form-check-input';
@@ -74,8 +99,8 @@ export default function taskDOM(titleText, descriptionText, priorityText, dueDat
   taskCompletedLabel.textContent = 'Completed';
 
   // Append elements
-  colIcon.appendChild(icon);
-  colIcon.appendChild(checkbox);
+  buttonContainer.appendChild(buttonGroup);
+  buttonContainer.appendChild(checkboxContainer);
 
   buttonGroup.appendChild(editButton);
   buttonGroup.appendChild(deleteButton);
@@ -83,10 +108,8 @@ export default function taskDOM(titleText, descriptionText, priorityText, dueDat
   checkboxContainer.appendChild(taskCompletedCheckbox);
   checkboxContainer.appendChild(taskCompletedLabel);
 
-  buttonContainer.appendChild(buttonGroup);
-  buttonContainer.appendChild(checkboxContainer);
+ 
 
-  cardBody.appendChild(title);
   cardBody.appendChild(description);
   cardBody.appendChild(priority);
   cardBody.appendChild(dueDate);
@@ -94,13 +117,13 @@ export default function taskDOM(titleText, descriptionText, priorityText, dueDat
 
   colBody.appendChild(cardBody);
 
-  row.appendChild(colIcon);
+  row.appendChild(titleContainer);
   row.appendChild(colBody);
 
   card.appendChild(row);
 
   // Append card to container
-  taskSpace.appendChild(card);
+  space.appendChild(card);
 
   deleteButton.addEventListener('click', ()=>{
     deleteFunction(card)

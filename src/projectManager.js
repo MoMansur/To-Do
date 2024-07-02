@@ -38,6 +38,7 @@ export default class ProjectManager{
   }
 
   displayer() {  
+    space.innerHTML = ""
     this.domCreator()
   }
 
