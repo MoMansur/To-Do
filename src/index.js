@@ -13,38 +13,43 @@ const myProjectManager = new ProjectManager();
 myProjectManager.displayer()
 
 
-// Selecting elements
+// Selecting elements by ID
 const addTaskButton = document.getElementById('addtasksidebar');
-const allTodosItem = document.querySelector('#defaultItemsBox #search');
-const todayItem = document.querySelector('#defaultItemsBox .list-group-item:nth-child(2)');
-const completedItem = document.querySelector('#defaultItemsBox .list-group-item:nth-child(3)');
-const upcomingItem = document.querySelector('#defaultItemsBox .list-group-item:nth-child(4)');
-const missedItem = document.querySelector('#defaultItemsBox .list-group-item:nth-child(5)');
+const allTodosItem = document.getElementById('allTodos');
+const todayItem = document.getElementById('TodayTodos');
+const completedItem = document.getElementById('CompletedTodo');
+const upcomingItem = document.getElementById('UpcomingTodo');
+const missedItem = document.getElementById('MissedTodo');
 
 // Usage example: Adding event listeners
 addTaskButton.addEventListener('click', () => {
-  
+  // Handle click on Add Task button
 });
 
-allTodosItem.addEventListener('click', ()=>{
-    myProjectManager.allTodos()
-})
+allTodosItem.addEventListener('click', () => {
+  // Handle click on All Todos item
+  myProjectManager.allTodos();
+});
 
 todayItem.addEventListener('click', () => {
-  // Handle click on today item
+  // Handle click on Today item
+  console.log('Today item clicked');
 });
 
 completedItem.addEventListener('click', () => {
-  // Handle click on completed item
+  // Handle click on Completed item
+  myProjectManager.completedTask();
 });
 
 upcomingItem.addEventListener('click', () => {
-  // Handle click on upcoming item
+  // Handle click on Upcoming item
+  myProjectManager.pendingTodo()
 });
 
 missedItem.addEventListener('click', () => {
-  // Handle click on missed item
+  // Handle click on Missed item
 });
+
 
 
 

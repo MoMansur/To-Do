@@ -14,16 +14,44 @@ export default class ProjectManager {
     console.log(this.allProjectFolder);
   }
 
-  allTodos(){
+   allTodos(){
     space.innerHTML = ""
-
     title.innerText = 'All My Todos'
     this.allProjectFolder.forEach(todo =>{
-
       const allTodosVar = todo.project
       Project.prototype.simpleDisplayer(allTodosVar)
       console.log(allTodosVar)
     })
+  }
+
+  completedTask(){
+    space.innerHTML = "";
+    title.innerText = 'All My Completed Tasks';
+    
+    this.allProjectFolder.forEach(projects => {
+      projects.project.forEach(task => {
+        if (task.isCompleted) {
+          const arr = projects.project
+          Project.prototype.simpleDisplayer(arr);
+          console.log(projects.project)
+        }
+      });
+    });
+    
+  }
+
+  pendingTodo(){
+    space.innerHTML = "";
+    title.innerText = 'All My Completed Tasks';
+    
+    this.allProjectFolder.forEach(projects => {
+      projects.project.forEach(task => {
+        if (task.isCompleted === false) {
+          const arr = projects.project
+          Project.prototype.simpleDisplayer(arr);
+        }
+      });
+    });
   }
 
 
