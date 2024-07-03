@@ -1,7 +1,6 @@
 import taskDOM from "./todoDOM.js";
 import newProjectPopUpForm from "./taskForm.js";
-import Task from "./todo.js";
-import { saveTasksToLocalStorage } from './localStorage.js';
+
 import ProjectManager from "./projectManager.js";
 
 const space = document.getElementById('space');
@@ -15,8 +14,28 @@ export default class Project {
     this.project = [];
   }
 
-  newTask(title, description, dueDate, priority, isCompleted) {
+  addTasks(task) {
+    this.project.push(task);
+    this.saveTasks();
   }
+
+  simpleDisplayer(array){
+    taskDOM(array)
+
+  }
+  displayer(array) {
+    space.innerHTML = "";
+    taskDOM(array)
+    this.dom(array.name);
+    return array;
+  }
+
+  
+  deleteProject(){
+  ProjectManager.prototype.saveProjects()
+
+  }
+ 
 
   newTaskFormBtn(selectArray){
     const addTaskBtn = document.getElementById('addTaskButton');
@@ -25,43 +44,17 @@ export default class Project {
       space.append(theForm);
       theForm.style.display = 'block';
     });
-    console.log(selectArray);
   }
 
-  deleteProject(){
-    this.saveTasks();
-
-  }
-
-  addTasks(task) {
-    this.project.push(task);
-    this.saveTasks();
-  }
-
-  saveTasks() {
-    saveTasksToLocalStorage(this.name, this.project);
-  }
-
-  displayer(array) {
-    space.innerHTML = "";
-
-    array.forEach(arrItem => {
-      taskDOM(arrItem.title, arrItem.description, arrItem.dueDate, arrItem.priority, arrItem.completed);
-    });
-    this.dom(array.name);
-
-    this.getSelectedTask(array, 0)
-    return array;
-  }
-
-  dom(projectName) {
+  dom() {
     const addTaskButton = document.createElement('button');
     addTaskButton.textContent = 'Add Task';
     addTaskButton.id = 'addTaskButton';
-    addTaskButton.className = 'btn btn-primary';
+    addTaskButton.className = 'btn btn-secondary';
     addTaskButton.style.width = '100%';
     space.append(addTaskButton);
   }
+
 
   getSelectedTask(array, index){
     const theIndex = array[index]
@@ -69,8 +62,7 @@ export default class Project {
     return theIndex
   }
 
-  editTask(title, description, dueDate, priority, isCompleted = false){
+  
 
-  }
 }
 

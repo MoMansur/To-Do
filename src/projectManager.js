@@ -1,11 +1,6 @@
 import Project from "./project.js";
 import modal from "./projectDom.js";
-import {
-  loadProjectsFromLocalStorage,
-  saveProjectsToLocalStorage,
-  loadTasksFromLocalStorage,
-  saveTasksToLocalStorage
-} from './localStorage.js';
+import { loadProjectsFromLocalStorage, saveProjectsToLocalStorage } from './localStorage.js';
 import newProjectPopUpForm from "./taskForm.js";
 
 export default class ProjectManager {
@@ -19,20 +14,25 @@ export default class ProjectManager {
     console.log(this.allProjectFolder);
   }
 
-  
+  allTodos(){
+    space.innerHTML = ""
+
+    title.innerText = 'All My Todos'
+    this.allProjectFolder.forEach(todo =>{
+
+      const allTodosVar = todo.project
+      Project.prototype.simpleDisplayer(allTodosVar)
+      console.log(allTodosVar)
+    })
+  }
+
 
   loadProjects() {
     this.allProjectFolder = loadProjectsFromLocalStorage();
-    this.allProjectFolder.forEach(project => {
-      project.project = loadTasksFromLocalStorage(project.name);
-    });
   }
 
   saveProjects() {
     saveProjectsToLocalStorage(this.allProjectFolder);
-    this.allProjectFolder.forEach(project => {
-      saveTasksToLocalStorage(project.name, project.project);
-    });
   }
 
   addNewProject(id, name, color) {
@@ -56,7 +56,6 @@ export default class ProjectManager {
     this.allProjectFolder.splice(index, 1);
     this.saveProjects();
     this.projectPageandSideBarDOM(this.allProjectFolder);
-    Project.prototype.deleteProject()
   }
 
   saveButton(project) {
@@ -75,23 +74,19 @@ export default class ProjectManager {
   getSelectedProjectArray(array) {
     let selectArray = array;
     this.selectedArrayDisplay(selectArray);
-    space.append(newProjectPopUpForm(selectArray));
 
-    // Project.prototype.getSelectedTask(selectArray, 1)
     this.saveProjects();
     return selectArray;
   }
 
   refresher() {
     space.innerHTML = "";
-    // this.displayer()
   }
 
   selectedArrayDisplay(selectArray) {
     space.append(newProjectPopUpForm(selectArray));
     Project.prototype.displayer(selectArray);
-
-    Project.prototype.newTaskFormBtn(selectArray)
+    Project.prototype.newTaskFormBtn(selectArray);
   }
 
   projectPageandSideBarDOM(projects) {
@@ -99,11 +94,9 @@ export default class ProjectManager {
     newProjectUL.innerHTML = "";
     space.innerHTML = "";
 
-    // Create and append the title
     title.innerText = 'My Projects';
     title.style.alignItems = 'center';
 
-    // Create and append the list container
     const projectList = document.createElement('ul');
     projectList.style.listStyleType = 'none';
     projectList.style.padding = '0';
@@ -133,7 +126,6 @@ export default class ProjectManager {
       listItemTaskSpace.style.padding = '10px';
       listItemTaskSpace.style.borderBottom = '1px solid #ccc';
       listItemTaskSpace.innerText = project.name;
-
       listItemTaskSpace.setAttribute('data-index', index);
 
       const deleteIcon = document.createElement('i');
