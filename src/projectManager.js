@@ -1,131 +1,132 @@
-const taskSpace = document.getElementById('taskSpace')
-const space = document.getElementById('space')
-const title = document.getElementById('title')
+import Project from "./project.js";
+import modal from "./projectDom.js";
+import {
+  loadProjectsFromLocalStorage,
+  saveProjectsToLocalStorage,
+  loadTasksFromLocalStorage,
+  saveTasksToLocalStorage
+} from './localStorage.js';
+import newProjectPopUpForm from "./taskForm.js";
 
-
-import Project from "./project.js"
-import modal from "./projectDom.js"
-import { loadProjectsFromLocalStorage, saveProjectsToLocalStorage } from './localStorage.js'
-import newProjectPopUpForm from "./taskForm.js"
-
-export default class ProjectManager{
-  constructor(){
-    this.newProject = []
-    this.allProjectFolder = []
+export default class ProjectManager {
+  constructor() {
+    this.allProjectFolder = [];
     this.loadProjects();
-    this.allTask = []
 
     if (this.allProjectFolder.length === 0) {
       this.addNewProject(1, 'Default', 'white').newTask('Task 2', 'This is a description for task 2', '2024-07-20', 'Medium');
     }
-    console.log(this.allProjectFolder)
+    console.log(this.allProjectFolder);
   }
+
   
+
   loadProjects() {
     this.allProjectFolder = loadProjectsFromLocalStorage();
+    this.allProjectFolder.forEach(project => {
+      project.project = loadTasksFromLocalStorage(project.name);
+    });
   }
 
   saveProjects() {
     saveProjectsToLocalStorage(this.allProjectFolder);
-    // console.log(this.allProjectFolder)
+    this.allProjectFolder.forEach(project => {
+      saveTasksToLocalStorage(project.name, project.project);
+    });
   }
-
 
   addNewProject(id, name, color) {
-    this.newProject = new Project(id, name, color);
-    this.allProjectFolder.push(this.newProject);
+    const newProject = new Project(id, name, color);
+    this.allProjectFolder.push(newProject);
     this.saveProjects();
-    return this.newProject;
+    return newProject;
   }
 
-  displayer() {  
-    space.innerHTML = ""
-    this.domCreator()
+  displayer() {
+    space.innerHTML = "";
+    this.domCreator();
   }
 
-  domCreator(){
+  domCreator() {
     this.projectPageandSideBarDOM(this.allProjectFolder);
     this.saveButton(this.allProjectFolder);
   }
 
   deleteProject(index) {
-    this.allProjectFolder.splice(index, 1);    
+    this.allProjectFolder.splice(index, 1);
     this.saveProjects();
     this.projectPageandSideBarDOM(this.allProjectFolder);
+    Project.prototype.deleteProject()
   }
-  
+
   saveButton(project) {
     const saveBtnNewProject = modal.saveButton;
     saveBtnNewProject.addEventListener('click', () => {
       const name = modal.nameInput.value;
       const color = modal.colorSelect.value;
       const id = this.allProjectFolder.length + 1;
-      
+
       this.addNewProject(id, name, color);
-      this.projectPageandSideBarDOM(project)
+      this.projectPageandSideBarDOM(project);
       modal.closeModal();
     });
   }
 
-    getSelectedProjectArray(array){
-      let selectArray = array
-      this.selectedArrayDisplay(selectArray)
-    
-      this.saveProjects()
-      return selectArray
-    }
+  getSelectedProjectArray(array) {
+    let selectArray = array;
+    this.selectedArrayDisplay(selectArray);
+    space.append(newProjectPopUpForm(selectArray));
 
-    refresher(){
-      space.innerHTML = ""
-      // this.displayer()
-    }
+    // Project.prototype.getSelectedTask(selectArray, 1)
+    this.saveProjects();
+    return selectArray;
+  }
 
-    selectedArrayDisplay(selectArray){ 
-      space.append(newProjectPopUpForm(selectArray))
-      Project.prototype.displayer(selectArray);
+  refresher() {
+    space.innerHTML = "";
+    // this.displayer()
+  }
 
-      const addTaskBtn = document.getElementById('addTaskButton')
-      addTaskBtn.addEventListener('click', ()=>{
-        const theForm = newProjectPopUpForm(selectArray)
-        space.append(theForm)
-        theForm.style.display = 'block'
-      })
-      console.log(selectArray)
-    }
-    //DOM
+  selectedArrayDisplay(selectArray) {
+    space.append(newProjectPopUpForm(selectArray));
+    Project.prototype.displayer(selectArray);
+
+    Project.prototype.newTaskFormBtn(selectArray)
+  }
+
   projectPageandSideBarDOM(projects) {
     const newProjectUL = document.getElementById('newProjectUL');
-    newProjectUL.innerHTML = ""
-    space.innerHTML = ""
-   
-     // Create and append the title
-     title.innerText = 'My Projects';
-     title.style.alignItems = 'center'
- 
-     // Create and append the list container
-     const projectList = document.createElement('ul');
-     projectList.style.listStyleType = 'none';
-     projectList.style.padding = '0';
-  
+    newProjectUL.innerHTML = "";
+    space.innerHTML = "";
+
+    // Create and append the title
+    title.innerText = 'My Projects';
+    title.style.alignItems = 'center';
+
+    // Create and append the list container
+    const projectList = document.createElement('ul');
+    projectList.style.listStyleType = 'none';
+    projectList.style.padding = '0';
+
     projects.forEach((project, index) => {
-    const listItem = document.createElement('li');
-    listItem.className = 'list-group-item';
-    listItem.id = 'projectFolder';
-    listItem.setAttribute('data-index', index);
+      const listItem = document.createElement('li');
+      listItem.className = 'list-group-item';
+      listItem.id = 'projectFolder';
+      listItem.setAttribute('data-index', index);
 
-    const icon = document.createElement('i');
-    icon.className = 'fa-solid fa-hashtag';
-    icon.style.color = project.color
-    icon.style.fontWeight = '100'
-    listItem.append(icon);
-    listItem.append(document.createTextNode(project.name));
+      const icon = document.createElement('i');
+      icon.className = 'fa-solid fa-hashtag';
+      icon.style.color = project.color;
+      icon.style.fontWeight = '100';
+      listItem.append(icon);
+      listItem.append(document.createTextNode(project.name));
 
-    listItem.style.backgroundColor = 'White'
-    listItem.addEventListener('click', () => {
-      let getProjectArray = project.project;
-      this.getSelectedProjectArray(getProjectArray);
-      title.innerText =  project.name;
-    })
+      listItem.style.backgroundColor = 'White';
+      listItem.addEventListener('click', () => {
+        let getProjectArray = project.project;
+        this.getSelectedProjectArray(getProjectArray);
+        title.innerText = project.name;
+      });
 
       const listItemTaskSpace = document.createElement('li');
       listItemTaskSpace.className = 'project-item';
@@ -135,40 +136,30 @@ export default class ProjectManager{
 
       listItemTaskSpace.setAttribute('data-index', index);
 
-        const deleteIcon = document.createElement('i');
-        deleteIcon.className = 'fa-solid fa-trash';
-        deleteIcon.id = 'deleteIcon';
-        deleteIcon.style.float = 'right';
-        deleteIcon.style.cursor = 'pointer';
+      const deleteIcon = document.createElement('i');
+      deleteIcon.className = 'fa-solid fa-trash';
+      deleteIcon.id = 'deleteIcon';
+      deleteIcon.style.float = 'right';
+      deleteIcon.style.cursor = 'pointer';
 
-        deleteIcon.addEventListener('click', (e) => {
-            e.stopPropagation();
-            console.log()
-          });
+      deleteIcon.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const index = parseInt(listItemTaskSpace.getAttribute("data-index"));
+        this.deleteProject(index);
+        this.saveProjects();
+      });
 
-        listItemTaskSpace.appendChild(deleteIcon);
-        projectList.appendChild(listItemTaskSpace);
+      listItemTaskSpace.appendChild(deleteIcon);
+      projectList.appendChild(listItemTaskSpace);
 
-        listItemTaskSpace.addEventListener('click', () => {
-          let getProjectArray = project.project;
-          this.getSelectedProjectArray(getProjectArray);
-          title.innerText =  project.name;
+      listItemTaskSpace.addEventListener('click', () => {
+        let getProjectArray = project.project;
+        this.getSelectedProjectArray(getProjectArray);
+        title.innerText = project.name;
+      });
 
-        })
-
-
-    deleteIcon.addEventListener('click', ()=>{
-      const index = parseInt(listItemTaskSpace.getAttribute("data-index"));
-      this.deleteProject(index)
-      this.saveProjects()
+      space.append(projectList);
+      newProjectUL.append(listItem);
     });
-    
-    space.append(projectList);
-       newProjectUL.append(listItem);
-
-    })
-
-   }
-
- 
+  }
 }

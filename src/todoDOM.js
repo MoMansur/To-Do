@@ -1,9 +1,10 @@
+import Project from "./project.js";
 import ProjectManager from "./projectManager.js";
 import Task from "./todo.js";
 
 // import { deleteFunction } from "./todo.js";
 
-export default function taskDOM(titleText, descriptionText, dueDateText, priorityText, index) {
+export default function taskDOM(titleText, descriptionText, dueDateText, priorityText, isCompleted, index) {
   // Create task card elements
   const space = document.getElementById('space');
 
@@ -166,27 +167,69 @@ export default function taskDOM(titleText, descriptionText, dueDateText, priorit
   // Append card to container
   space.appendChild(card);
 
-  const task = new Task(titleText, descriptionText, dueDateText, priorityText);
+  const task = new Task(titleText, descriptionText, dueDateText, priorityText, checkbox.checked);
 
-  deleteButton.addEventListener('click', () => {
-    deleteFunction(card);
-  });
+  // deleteButton.addEventListener('click', () => {
+  //   const indexAttribute = parseInt(theCard.getAttribute("data-index"));
+  //   const confirmToRemove = confirm('Are you sure you want to remove this task?');
+  // if (confirmToRemove) {
+  //     .splice(indexAttribute, 1);
+  //     project.prototype.displayer(newProject);
+  //     console.log(newProject);
+  //   } else {
+  //     displayer(newProject);
+  //     console.log(newProject);
+  //   }
+  // });
+
+   
+
 
   checkbox.addEventListener('change', () => {
     const isCompleted = task.completedFunc(checkbox);
-    
-    // ProjectManager.prototype.saveProjects()
-    console.log(checkbox.checked)
+    console.log(checkbox.checked);
+    Project.prototype.saveTasks();
 
     if (isCompleted) {
       card.style.backgroundColor = 'lightgray';
       checkboxSpan.style.backgroundColor = 'green';
       statusText.textContent = 'Complete';
-
     } else {
       card.style.backgroundColor = '';
       statusText.textContent = 'Incomplete';
       checkboxSpan.style.backgroundColor = 'lightgray';
     }
   });
+
+  function editTask(task, projectId, taskId, card) {
+    const titleInput = prompt('Enter new title:', task.title);
+    const descriptionInput = prompt('Enter new description:', task.description);
+    const dueDateInput = prompt('Enter new due date:', task.dueDate);
+    const priorityInput = prompt('Enter new priority:', task.priority);
+  
+    if (titleInput && descriptionInput && dueDateInput && priorityInput) {
+      task.title = titleInput;
+      task.description = descriptionInput;
+      task.dueDate = dueDateInput;
+      task.priority = priorityInput;
+  
+      const projects = JSON.parse(localStorage.getItem('projects')) || [];
+      const project = projects.find(proj => proj.id === projectId);
+      if (project) {
+        const taskToUpdate = project.tasks[taskId];
+        if (taskToUpdate) {
+          taskToUpdate.title = task.title;
+          taskToUpdate.description = task.description;
+          taskToUpdate.dueDate = task.dueDate;
+          taskToUpdate.priority = task.priority;
+          localStorage.setItem('projects', JSON.stringify(projects));
+  
+          card.querySelector('.card-title').textContent = task.title;
+          card.querySelector('.description').textContent = task.description;
+          card.querySelector('.fa-calendar-day').parentElement.innerHTML = `<small class="text-muted"><i class="fas fa-calendar-day"></i> ${task.dueDate}</small>`;
+          card.querySelector('.fa-flag').parentElement.innerHTML = `<small class="text-muted"><i class="fas fa-flag"></i> ${task.priority}</small>`;
+        }
+      }
+    }
+  }
 }

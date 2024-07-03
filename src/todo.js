@@ -12,5 +12,21 @@ export default class Task {
     console.log(this.isCompleted)
     return this.isCompleted;
   }
+
+  toggleCompletion(isCompleted, projectId, taskId) {
+    this.completed = isCompleted;
+    const projects = JSON.parse(localStorage.getItem('projects')) || [];
+    const project = projects.find(proj => proj.id === projectId);
+    if (project) {
+      const task = project.tasks[taskId];
+      if (task) {
+        task.completed = this.completed;
+        localStorage.setItem('projects', JSON.stringify(projects));
+      }
+    }
+  }
+  
 }
+
+
 
