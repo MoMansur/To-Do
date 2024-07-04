@@ -1,7 +1,20 @@
 import Project from "./project.js";
 import modal from "./projectDom.js";
 import { loadProjectsFromLocalStorage, saveProjectsToLocalStorage } from './localStorage.js';
-import newTaskFormDOM from "./taskForm.js";
+
+const space = document.getElementById('space');
+
+
+function formatDateToDMY(date) {
+  const [year, month, day] = date.split('-'); // Assuming the date is initially in 'year-month-day' format
+  const dateObject = new Date(year, month - 1, day); // Create a Date object
+  
+  const dayName = dateObject.toLocaleDateString('en-US', { weekday: 'long' }); // Get the day name
+  const formattedDate = `${day}/${month}/${year}`;
+  
+  return `${dayName}, ${formattedDate}`;
+}
+
 
 export default class ProjectManager {
   constructor() {
@@ -9,37 +22,49 @@ export default class ProjectManager {
     this.loadProjects();
 
     if (this.allProjectFolder.length === 0) {
-      this.addNewProject(1, 'Default', 'white').newTask('Task 2', 'This is a description for task 2', '2024-07-20', 'Medium');
+      space.innerHTML = `No project Found`
+      this.projectPageandSideBarDOM(this.allProjectFolder)
     }
-    this.projectPageandSideBarDOM(this.allProjectFolder)
-
     console.log(this.allProjectFolder);
   }
+//Methods Below
 
    allTodos(){
     space.innerHTML = ""
     title.innerText = 'All My Todos'
+   
     this.allProjectFolder.forEach(todo =>{
       const allTodosVar = todo.project
+      if(allTodosVar === ''){space.innerHTML = '<h4>No Task Found</h4>'}
       Project.prototype.simpleDisplayer(allTodosVar)
+
       console.log(allTodosVar)
     })
   }
 
-  completedTask(){
+  completedTask() {
     space.innerHTML = "";
     title.innerText = 'All My Completed Tasks';
     
+    let completedTasksFound = false;
+  
     this.allProjectFolder.forEach(projects => {
       projects.project.forEach(task => {
         if (task.isCompleted) {
-          const arr = projects.project
-          Project.prototype.simpleDisplayer(arr);
-          console.log(projects.project)
+          completedTasksFound = true;
+          Project.prototype.simpleDisplayer([task]);
+
+          console.log(task);
         }
       });
+
     });
-    
+    this.saveProjects();
+
+  
+    if (!completedTasksFound) {
+      space.innerHTML = '<h4>No Completed Task Found</h4>';
+    }
   }
 
   pendingTodo(){
@@ -51,20 +76,28 @@ export default class ProjectManager {
         if (task.isCompleted === false) {
           const arr = projects.project
           Project.prototype.simpleDisplayer(arr);
+       
+          if(arr === ''){space.innerHTML = '<h4>No Upcoming Task Found</h4>'}
+
         }
       });
     });
-
-
-   
-
   }
 
   todayTodos() {
     const today = new Date();
-    const localDate = today.toLocaleDateString('en-GB'); // Adjust to the required locale format
+    const options = {
+      weekday: 'long',
+      day: '2-digit', 
+      month: '2-digit',
+      year: 'numeric' 
+    };
+
+    const localDate = today.toLocaleDateString('en-GB', options); // Adjust to the required locale format
  
+
     space.innerHTML = "";
+
     title.innerText = 'Today Tasks';
 
     this.allProjectFolder.forEach(projects => {
@@ -78,8 +111,6 @@ export default class ProjectManager {
 
     console.log(localDate); 
   }
-
-
 
   loadProjects() {
     this.allProjectFolder = loadProjectsFromLocalStorage();
@@ -103,7 +134,7 @@ export default class ProjectManager {
 
   domCreator() {
     this.projectPageandSideBarDOM(this.allProjectFolder);
-    this.saveButton(this.allProjectFolder);
+    this.newProjectForm(this.allProjectFolder);
   }
 
   deleteProject(index) {
@@ -112,8 +143,14 @@ export default class ProjectManager {
     this.projectPageandSideBarDOM(this.allProjectFolder);
   }
 
-  saveButton(project) {
+  newProjectForm(project) {
+      const createNewProject = document.getElementById('createNewProject')
+      createNewProject.addEventListener('click', ()=>{
+      modal.openModal()
+  })
+
     const saveBtnNewProject = modal.saveButton;
+    
     saveBtnNewProject.addEventListener('click', () => {
       const name = modal.nameInput.value;
       const color = modal.colorSelect.value;
@@ -131,6 +168,12 @@ export default class ProjectManager {
 
     this.saveProjects();
     return selectArray;
+  }
+  getClickedIndex(array){
+    let clickedArray = array
+
+    console.log(clickedArray)
+    return clickedArray
   }
 
   refresher() {
@@ -205,3 +248,4 @@ export default class ProjectManager {
     });
   }
 }
+

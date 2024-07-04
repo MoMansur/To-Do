@@ -1,5 +1,4 @@
-
-import newTaskFormDOM from "./taskForm.js";
+import Task from "./todo.js";
 
 export default function taskDOM(projectArray) {
   const space = document.getElementById('space');
@@ -115,6 +114,9 @@ export default function taskDOM(projectArray) {
     deleteButton.innerHTML = '<i class="fas fa-trash"></i> Delete';
 
    
+    
+
+
     buttonContainer.style.padding = '10px';
 
     const checkboxSpan = document.createElement('span');
@@ -166,7 +168,7 @@ export default function taskDOM(projectArray) {
  
 
     editButton.addEventListener('click', () => {
-      editTask(task, index, 0, card);
+      Task.prototype.editTask(task, index, 0, card);
     });
 
     
@@ -178,67 +180,27 @@ export default function taskDOM(projectArray) {
       checkboxSpan.style.backgroundColor = 'green'
       checkbox.style.color = 'white'
       checkboxSpan.style.padding = '15px'
-      statusChange(task, true)
+      Task.prototype.statusChange(task, true)
     } else {
       statusText.textContent = 'Incomplete';
       checkboxSpan.style.backgroundColor = 'lightgrey'
       checkboxSpan.style.padding = '15px'
-      statusChange(task, true)
+      Task.prototype.statusChange(task, false)
     }
   });
 
+
+  deleteButton.addEventListener('click', () => {
+    const projectId = task.id;
+    const taskId = parseInt(card.getAttribute('data-index'));
+    console.log(projectArray)
+    console.log(task)
+    Task.prototype.deleteTask(projectArray, index);
+  });
+
+
   });
 }
 
-function editTask(task, projectId, taskId, card) {
-  const formContainer = newTaskFormDOM([]);
-  document.body.appendChild(formContainer);
 
-  const form = formContainer.querySelector('form');
-  const titleInput = form.querySelector('#projectTitle');
-  const descriptionInput = form.querySelector('#projectDescription');
-  const dueDateInput = form.querySelector('#projectDueDate');
-  const prioritySelect = form.querySelector('#projectPriority');
 
-  titleInput.value = task.title;
-  descriptionInput.value = task.description;
-  dueDateInput.value = task.dueDate;
-  prioritySelect.value = task.priority;
-
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
-
-    task.title = titleInput.value;
-    task.description = descriptionInput.value;
-    task.dueDate = dueDateInput.value;
-    task.priority = prioritySelect.value;
-
-    const projects = JSON.parse(localStorage.getItem('projects')) || [];
-    const project = projects.find(proj => proj.id === projectId);
-    if (project) {
-      const taskToUpdate = project.tasks[taskId];
-      if (taskToUpdate) {
-        taskToUpdate.title = task.title;
-        taskToUpdate.description = task.description;
-        taskToUpdate.dueDate = task.dueDate;
-        taskToUpdate.priority = task.priority;
-        localStorage.setItem('projects', JSON.stringify(projects));
-
-        card.querySelector('.card-title').textContent = task.title;
-        card.querySelector('.description').textContent = task.description;
-        card.querySelector('.fa-calendar-day').parentElement.innerHTML = `<small class="text-muted"><i class="fas fa-calendar-day"></i> ${task.dueDate}</small>`;
-        card.querySelector('.fa-flag').parentElement.innerHTML = `<small class="text-muted"><i class="fas fa-flag"></i> ${task.priority}</small>`;
-      }
-    }
-
-    
-    formContainer.style.display = 'none';
-  });
-
-  formContainer.style.display = 'block';
-}
-function statusChange(task,status){
-  const projects = JSON.parse(localStorage.getItem('projects')) || [];
-  task.isCompleted = status
-  localStorage.setItem('projects', JSON.stringify(projects));
-}

@@ -1,6 +1,5 @@
 const taskSpace = document.getElementById('taskSpace')
 
-import modal from "./projectDom.js";
 import todoFunctions from "./functions.js";
 
 
@@ -29,17 +28,22 @@ addTaskButton.addEventListener('click', () => {
 allTodosItem.addEventListener('click', () => {
   // Handle click on All Todos item
   myProjectManager.allTodos();
+  myProjectManager.saveProjects()
 });
 
 todayItem.addEventListener('click', () => {
   // Handle click on Today item
   console.log('Today item clicked');
   myProjectManager.todayTodos()
+  myProjectManager.saveProjects()
+
 });
 
 completedItem.addEventListener('click', () => {
   // Handle click on Completed item
   myProjectManager.completedTask();
+  myProjectManager.saveProjects()
+
 });
 
 upcomingItem.addEventListener('click', () => {
@@ -62,8 +66,4 @@ missedItem.addEventListener('click', () => {
 todoFunctions(taskSpace)
 
 
-const createNewProject = document.getElementById('createNewProject')
-createNewProject.addEventListener('click', ()=>{
-    modal.openModal()
-})
 

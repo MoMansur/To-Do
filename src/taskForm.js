@@ -1,4 +1,4 @@
-
+const space = document.getElementById('space')
 export default function newTaskFormDOM(selectArray) {
     const formContainer = document.createElement('div');
     formContainer.classList.add('form-container');
@@ -92,19 +92,24 @@ export default function newTaskFormDOM(selectArray) {
 
       function formatDateToDMY(date) {
         const [year, month, day] = date.split('-'); // Assuming the date is initially in 'year-month-day' format
-        return `${day}/${month}/${year}`;
+        const dateObject = new Date(year, month - 1, day); // Create a Date object
+        
+        const dayName = dateObject.toLocaleDateString('en-US', { weekday: 'long' }); // Get the day name
+        const formattedDate = `${day}/${month}/${year}`;
+        
+        return `${dayName}, ${formattedDate}`;
       }
       
       e.preventDefault();
       const title = titleInput.value;
       const description = descriptionInput.value;
-      const dueDate = formatDateToDMY(dueDateInput.value)
+      const dueDate = dueDateInput.value
       const priority = prioritySelect.value;
 
       const theNewTask = {
         title: title,
         description: description,
-        dueDate: dueDate,
+        dueDate: formatDateToDMY(dueDate),
         priority: priority,
         isCompleted: false
       };
@@ -115,5 +120,7 @@ export default function newTaskFormDOM(selectArray) {
     });
     
 
+    space.append(formContainer)
+    
     return formContainer;
 }

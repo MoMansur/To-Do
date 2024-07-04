@@ -84,19 +84,25 @@ const modal = (function() {
       const projectName = nameInput.value;
       const projectColor = colorSelect.value;
       closeModal();
+  
+     
    
   
     });
   
+   
     // Function to close the modal
     function closeModal() {
       modalContainer.style.display = 'none';
+      resetForm();
     }
   
     // Function to open the modal
     function openModal() {
       modalContainer.style.display = 'block';
       space.append(modalContainer)
+      nameInput.value = '';
+      colorSelect.selectedIndex = 0;
     }
   
 

@@ -14,10 +14,6 @@ export default class Project {
     this.project = [];
   }
 
-  addTasks(task) {
-    this.project.push(task);
-    this.saveTasks();
-  }
 
   simpleDisplayer(array){
     taskDOM(array)
@@ -27,18 +23,12 @@ export default class Project {
     space.innerHTML = "";
     taskDOM(array)
     this.dom(array.name);
-    space.append(newTaskFormDOM(array));
+    newTaskFormDOM(array)
     this.newTaskFormBtn(array)
 
     return array;
   }
 
-  
-  deleteProject(){
-  ProjectManager.prototype.saveProjects()
-
-  }
- 
 
   newTaskFormBtn(selectArray){
     const addTaskBtn = document.getElementById('addTaskButton');
@@ -55,17 +45,11 @@ export default class Project {
     addTaskButton.id = 'addTaskButton';
     addTaskButton.className = 'btn btn-secondary';
     addTaskButton.style.width = '100%';
+    //<i class="fa-solid fa-circle-plus"></i>
     space.append(addTaskButton);
   }
 
 
-  getSelectedTask(array, index){
-    const theIndex = array[index]
-    console.log(theIndex)
-    return theIndex
-  }
-
-  
 
 }
 
