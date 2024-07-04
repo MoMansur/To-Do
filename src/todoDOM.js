@@ -1,7 +1,5 @@
-import Project from "./project.js";
-import ProjectManager from "./projectManager.js";
-import newProjectPopUpForm from "./taskForm.js";
-import Task from "./todo.js";
+
+import newTaskFormDOM from "./taskForm.js";
 
 export default function taskDOM(projectArray) {
   const space = document.getElementById('space');
@@ -87,8 +85,12 @@ export default function taskDOM(projectArray) {
 
     const dueDate = document.createElement('p');
     dueDate.className = 'card-text';
-    dueDate.innerHTML = `<small class="text-muted"><i class="fas fa-calendar-day"></i> ${dueDateText}</small>`;
+    dueDate.innerHTML = `<small class="text-muted">
+    <i class="fas fa-calendar-day"></i> ${dueDateText}</small>`;
+    dueDate.setAttribute('required', true)
 
+
+  
     elementContainer.appendChild(description);
     elementContainer.appendChild(dueDate);
     elementContainer.appendChild(priority);
@@ -189,7 +191,7 @@ export default function taskDOM(projectArray) {
 }
 
 function editTask(task, projectId, taskId, card) {
-  const formContainer = newProjectPopUpForm([]);
+  const formContainer = newTaskFormDOM([]);
   document.body.appendChild(formContainer);
 
   const form = formContainer.querySelector('form');

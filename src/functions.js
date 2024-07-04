@@ -1,4 +1,4 @@
-import newProjectPopUpForm from "./taskForm.js";
+import newTaskFormDOM from "./taskForm.js";
 import createSettingsPage from "./settings.js";
 
 
@@ -14,9 +14,9 @@ settingsIcon.addEventListener('click', ()=>{
 // let isOn =  true
 // addTaskBtn.addEventListener('click', ()=>{
 //     if(isOn){
-//         theDiv.appendChild(newProjectPopUpForm())
+//         theDiv.appendChild(newTaskFormDOM())
 //     }else{
-//        newProjectPopUpForm().remove()
+//        newTaskFormDOM().remove()
 //     }
 //     isOn = !isOn
 // })

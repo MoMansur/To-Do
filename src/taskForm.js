@@ -1,5 +1,5 @@
 
-export default function newProjectPopUpForm(selectArray) {
+export default function newTaskFormDOM(selectArray) {
     const formContainer = document.createElement('div');
     formContainer.classList.add('form-container');
 
@@ -89,10 +89,16 @@ export default function newProjectPopUpForm(selectArray) {
     formContainer.appendChild(form);
 
     form.addEventListener('submit', (e) => {
+
+      function formatDateToDMY(date) {
+        const [year, month, day] = date.split('-'); // Assuming the date is initially in 'year-month-day' format
+        return `${day}/${month}/${year}`;
+      }
+      
       e.preventDefault();
       const title = titleInput.value;
       const description = descriptionInput.value;
-      const dueDate = dueDateInput.value;
+      const dueDate = formatDateToDMY(dueDateInput.value)
       const priority = prioritySelect.value;
 
       const theNewTask = {

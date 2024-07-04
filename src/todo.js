@@ -1,8 +1,16 @@
+function formatDateToDMY(date) {
+  const [year, month, day] = date.split('-'); // Assuming the date is initially in 'year-month-day' format
+  return `${day}/${month}/${year}`;
+}
+
+
+
+
 export default class Task {
   constructor(title, description, dueDate, priority, isCompleted = false) {
     this.title = title;
     this.description = description;
-    this.dueDate = dueDate;
+    this.dueDate = formatDateToDMY(dueDate);
     this.priority = priority;
     this.isCompleted = isCompleted;
   }

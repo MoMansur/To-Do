@@ -34,6 +34,7 @@ allTodosItem.addEventListener('click', () => {
 todayItem.addEventListener('click', () => {
   // Handle click on Today item
   console.log('Today item clicked');
+  myProjectManager.todayTodos()
 });
 
 completedItem.addEventListener('click', () => {

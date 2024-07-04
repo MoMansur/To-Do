@@ -1,7 +1,7 @@
 import Project from "./project.js";
 import modal from "./projectDom.js";
 import { loadProjectsFromLocalStorage, saveProjectsToLocalStorage } from './localStorage.js';
-import newProjectPopUpForm from "./taskForm.js";
+import newTaskFormDOM from "./taskForm.js";
 
 export default class ProjectManager {
   constructor() {
@@ -11,6 +11,8 @@ export default class ProjectManager {
     if (this.allProjectFolder.length === 0) {
       this.addNewProject(1, 'Default', 'white').newTask('Task 2', 'This is a description for task 2', '2024-07-20', 'Medium');
     }
+    this.projectPageandSideBarDOM(this.allProjectFolder)
+
     console.log(this.allProjectFolder);
   }
 
@@ -52,7 +54,31 @@ export default class ProjectManager {
         }
       });
     });
+
+
+   
+
   }
+
+  todayTodos() {
+    const today = new Date();
+    const localDate = today.toLocaleDateString('en-GB'); // Adjust to the required locale format
+ 
+    space.innerHTML = "";
+    title.innerText = 'Today Tasks';
+
+    this.allProjectFolder.forEach(projects => {
+      projects.project.forEach(task => {
+        if (task.dueDate === localDate) {
+          Project.prototype.simpleDisplayer([task]);
+          console.log(task);
+        }
+      });
+    });
+
+    console.log(localDate); 
+  }
+
 
 
   loadProjects() {
@@ -101,7 +127,7 @@ export default class ProjectManager {
 
   getSelectedProjectArray(array) {
     let selectArray = array;
-    this.selectedArrayDisplay(selectArray);
+    Project.prototype.displayer(selectArray);
 
     this.saveProjects();
     return selectArray;
@@ -111,11 +137,7 @@ export default class ProjectManager {
     space.innerHTML = "";
   }
 
-  selectedArrayDisplay(selectArray) {
-    space.append(newProjectPopUpForm(selectArray));
-    Project.prototype.displayer(selectArray);
-    Project.prototype.newTaskFormBtn(selectArray);
-  }
+
 
   projectPageandSideBarDOM(projects) {
     const newProjectUL = document.getElementById('newProjectUL');

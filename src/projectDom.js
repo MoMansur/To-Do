@@ -55,10 +55,20 @@ const modal = (function() {
   
     // Save button
     const saveButton = document.createElement('button');
-    saveButton.className = 'btn btn-primary';
+    saveButton.className = 'btn btn-primary mt-2';
     saveButton.id = 'saveBtnNewProject'
     saveButton.textContent = 'Create Folder';
     modalBody.appendChild(saveButton);
+
+    const cancelButton = document.createElement('button');
+    cancelButton.type = 'button';
+    cancelButton.textContent = 'Cancel';
+    cancelButton.className = 'btn btn-danger mt-2 ms-2';
+    
+    cancelButton.addEventListener('click', () => {
+        modalContainer.style.display = 'none';
+    });
+    modalBody.appendChild(cancelButton);
   
     // Append all parts to modal content
     modalContent.appendChild(modalHeader);

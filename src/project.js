@@ -1,5 +1,5 @@
 import taskDOM from "./todoDOM.js";
-import newProjectPopUpForm from "./taskForm.js";
+import newTaskFormDOM from "./taskForm.js";
 
 import ProjectManager from "./projectManager.js";
 
@@ -27,6 +27,9 @@ export default class Project {
     space.innerHTML = "";
     taskDOM(array)
     this.dom(array.name);
+    space.append(newTaskFormDOM(array));
+    this.newTaskFormBtn(array)
+
     return array;
   }
 
@@ -40,7 +43,7 @@ export default class Project {
   newTaskFormBtn(selectArray){
     const addTaskBtn = document.getElementById('addTaskButton');
     addTaskBtn.addEventListener('click', () => {
-      const theForm = newProjectPopUpForm(selectArray);
+      const theForm = newTaskFormDOM(selectArray);
       space.append(theForm);
       theForm.style.display = 'block';
     });

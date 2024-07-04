@@ -390,9 +390,9 @@ var ProjectManager = /*#__PURE__*/function () {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ newProjectPopUpForm)
+/* harmony export */   "default": () => (/* binding */ newTaskFormDOM)
 /* harmony export */ });
-function newProjectPopUpForm(selectArray) {
+function newTaskFormDOM(selectArray) {
   var formContainer = document.createElement('div');
   formContainer.classList.add('form-container');
   var form = document.createElement('form');

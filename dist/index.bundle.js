@@ -27,9 +27,9 @@ function todoFunctions(theDiv) {
   // let isOn =  true
   // addTaskBtn.addEventListener('click', ()=>{
   //     if(isOn){
-  //         theDiv.appendChild(newProjectPopUpForm())
+  //         theDiv.appendChild(newTaskFormDOM())
   //     }else{
-  //        newProjectPopUpForm().remove()
+  //        newTaskFormDOM().remove()
   //     }
   //     isOn = !isOn
   // })
@@ -511,9 +511,9 @@ function createSettingsPage(taskSpace, userName) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ newProjectPopUpForm)
+/* harmony export */   "default": () => (/* binding */ newTaskFormDOM)
 /* harmony export */ });
-function newProjectPopUpForm(selectArray) {
+function newTaskFormDOM(selectArray) {
   var formContainer = document.createElement('div');
   formContainer.classList.add('form-container');
   var form = document.createElement('form');
