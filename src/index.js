@@ -8,9 +8,10 @@ import ProjectManager from "./projectManager.js";
 
 const myProjectManager = new ProjectManager();
 
-
+// myProjectManager.homePage()
 myProjectManager.displayer()
 
+export const theManager = ()=> myProjectManager
 
 // Selecting elements by ID
 const addTaskButton = document.getElementById('addtasksidebar');
@@ -19,6 +20,12 @@ const todayItem = document.getElementById('TodayTodos');
 const completedItem = document.getElementById('CompletedTodo');
 const upcomingItem = document.getElementById('UpcomingTodo');
 const missedItem = document.getElementById('MissedTodo');
+const homePage =  document.getElementById('homePage')
+
+homePage.addEventListener('click', ()=>{
+  myProjectManager.homePage()
+  myProjectManager.saveProjects()
+})
 
 // Usage example: Adding event listeners
 addTaskButton.addEventListener('click', () => {

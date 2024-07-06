@@ -17,15 +17,14 @@ export default class Project {
 
   simpleDisplayer(array){
     taskDOM(array)
-
   }
+  
   displayer(array) {
     space.innerHTML = "";
     taskDOM(array)
     this.dom(array.name);
     newTaskFormDOM(array)
     this.newTaskFormBtn(array)
-
     return array;
   }
 

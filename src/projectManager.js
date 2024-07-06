@@ -5,16 +5,6 @@ import { loadProjectsFromLocalStorage, saveProjectsToLocalStorage } from './loca
 const space = document.getElementById('space');
 
 
-function formatDateToDMY(date) {
-  const [year, month, day] = date.split('-'); // Assuming the date is initially in 'year-month-day' format
-  const dateObject = new Date(year, month - 1, day); // Create a Date object
-  
-  const dayName = dateObject.toLocaleDateString('en-US', { weekday: 'long' }); // Get the day name
-  const formattedDate = `${day}/${month}/${year}`;
-  
-  return `${dayName}, ${formattedDate}`;
-}
-
 
 export default class ProjectManager {
   constructor() {
@@ -22,13 +12,18 @@ export default class ProjectManager {
     this.loadProjects();
 
     if (this.allProjectFolder.length === 0) {
-      space.innerHTML = `No project Found`
-      this.projectPageandSideBarDOM(this.allProjectFolder)
+    this.addNewProject(0,  'Default', 'black',)
     }
     console.log(this.allProjectFolder);
   }
 //Methods Below
 
+homePage(){
+  this.getSelectedProjectArray(this.allProjectFolder)
+  this.allTodos()
+  title.innerHTML = `Home`
+
+}
    allTodos(){
     space.innerHTML = ""
     title.innerText = 'All My Todos'
@@ -36,8 +31,8 @@ export default class ProjectManager {
     this.allProjectFolder.forEach(todo =>{
       const allTodosVar = todo.project
       if(allTodosVar === ''){space.innerHTML = '<h4>No Task Found</h4>'}
-      Project.prototype.simpleDisplayer(allTodosVar)
-
+      // Project.prototype.simpleDisplayer(allTodosVar)
+      this.getSelectedProjectArray(allTodosVar)
       console.log(allTodosVar)
     })
   }
@@ -54,7 +49,6 @@ export default class ProjectManager {
           completedTasksFound = true;
           Project.prototype.simpleDisplayer([task]);
 
-          console.log(task);
         }
       });
 
@@ -92,12 +86,8 @@ export default class ProjectManager {
       month: '2-digit',
       year: 'numeric' 
     };
-
-    const localDate = today.toLocaleDateString('en-GB', options); // Adjust to the required locale format
- 
-
+    const localDate = today.toLocaleDateString('en-GB', options); 
     space.innerHTML = "";
-
     title.innerText = 'Today Tasks';
 
     this.allProjectFolder.forEach(projects => {
@@ -129,12 +119,8 @@ export default class ProjectManager {
 
   displayer() {
     space.innerHTML = "";
-    this.domCreator();
-  }
-
-  domCreator() {
     this.projectPageandSideBarDOM(this.allProjectFolder);
-    this.newProjectForm(this.allProjectFolder);
+    this.newProjectForm(this.allProjectFolder);  
   }
 
   deleteProject(index) {
@@ -147,37 +133,32 @@ export default class ProjectManager {
       const createNewProject = document.getElementById('createNewProject')
       createNewProject.addEventListener('click', ()=>{
       modal.openModal()
-  })
+    })
 
     const saveBtnNewProject = modal.saveButton;
-    
     saveBtnNewProject.addEventListener('click', () => {
       const name = modal.nameInput.value;
       const color = modal.colorSelect.value;
       const id = this.allProjectFolder.length + 1;
 
-      this.addNewProject(id, name, color);
+      this.addNewProject(id, name, color,);
       this.projectPageandSideBarDOM(project);
       modal.closeModal();
     });
   }
 
   getSelectedProjectArray(array) {
-    let selectArray = array;
-    Project.prototype.displayer(selectArray);
+    Project.prototype.simpleDisplayer(array);
 
     this.saveProjects();
-    return selectArray;
-  }
-  getClickedIndex(array){
-    let clickedArray = array
-
-    console.log(clickedArray)
-    return clickedArray
+    return array;
   }
 
-  refresher() {
-    space.innerHTML = "";
+ 
+
+  refresher(disArray) {
+    Project.prototype.displayer(disArray)
+    this.saveProjects()
   }
 
 
@@ -210,7 +191,8 @@ export default class ProjectManager {
       listItem.style.backgroundColor = 'White';
       listItem.addEventListener('click', () => {
         let getProjectArray = project.project;
-        this.getSelectedProjectArray(getProjectArray);
+
+        Project.prototype.displayer(getProjectArray);
         title.innerText = project.name;
       });
 
@@ -231,7 +213,6 @@ export default class ProjectManager {
         e.stopPropagation();
         const index = parseInt(listItemTaskSpace.getAttribute("data-index"));
         this.deleteProject(index);
-        this.saveProjects();
       });
 
       listItemTaskSpace.appendChild(deleteIcon);
@@ -239,7 +220,7 @@ export default class ProjectManager {
 
       listItemTaskSpace.addEventListener('click', () => {
         let getProjectArray = project.project;
-        this.getSelectedProjectArray(getProjectArray);
+        Project.prototype.displayer(getProjectArray);
         title.innerText = project.name;
       });
 

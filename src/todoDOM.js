@@ -1,3 +1,5 @@
+import Project from "./project.js";
+import ProjectManager from "./projectManager.js";
 import Task from "./todo.js";
 
 export default function taskDOM(projectArray) {
@@ -89,11 +91,6 @@ export default function taskDOM(projectArray) {
     dueDate.setAttribute('required', true)
 
 
-  
-    elementContainer.appendChild(description);
-    elementContainer.appendChild(dueDate);
-    elementContainer.appendChild(priority);
-
     const cardBody = document.createElement('div');
     cardBody.className = 'card-body';
     cardBody.appendChild(elementContainer);
@@ -132,18 +129,12 @@ export default function taskDOM(projectArray) {
     statusText.className = 'status-text';
   
 
-    if(isCompleted){
-      checkbox.checked = true
-      statusText.textContent = 'Completed';
-      checkboxSpan.style.backgroundColor = 'green'
-      checkbox.style.color = 'white'
-      checkboxSpan.style.padding = '15px'
-    }else{
-        checkbox.checked = false
-      statusText.textContent = 'Incomplete';
-      checkboxSpan.style.backgroundColor = 'lightgrey'
-      checkboxSpan.style.padding = '15px'
-    }
+
+    
+  
+    elementContainer.appendChild(description);
+    elementContainer.appendChild(dueDate);
+    elementContainer.appendChild(priority);
 
        
     checkboxSpan.appendChild(checkbox);
@@ -173,11 +164,31 @@ export default function taskDOM(projectArray) {
 
     
   ///////////////////////
+
+  if (task.isCompleted) {
+    checkbox.checked = true;
+    statusText.textContent = 'Completed';
+    checkboxSpan.style.backgroundColor = 'green';
+    row.style.backgroundColor = 'lightgrey'
+    checkbox.style.color = 'white';
+    checkboxSpan.style.padding = '15px';
+} else {
+    checkbox.checked = false;
+    statusText.textContent = 'Incomplete';
+    checkboxSpan.style.backgroundColor = 'lightgrey';
+    checkboxSpan.style.padding = '15px';
+     row.style.backgroundColor = 'white'
+}
+
   checkbox.addEventListener('change', () => {
  
+
+
     if (checkbox.checked) {
       statusText.textContent = 'Completed';
       checkboxSpan.style.backgroundColor = 'green'
+      row.style.backgroundColor = 'lightgrey'
+
       checkbox.style.color = 'white'
       checkboxSpan.style.padding = '15px'
       Task.prototype.statusChange(task, true)
@@ -185,17 +196,15 @@ export default function taskDOM(projectArray) {
       statusText.textContent = 'Incomplete';
       checkboxSpan.style.backgroundColor = 'lightgrey'
       checkboxSpan.style.padding = '15px'
+      row.style.backgroundColor = 'white'
+
       Task.prototype.statusChange(task, false)
     }
   });
 
 
   deleteButton.addEventListener('click', () => {
-    const projectId = task.id;
-    const taskId = parseInt(card.getAttribute('data-index'));
-    console.log(projectArray)
-    console.log(task)
-    Task.prototype.deleteTask(projectArray, index);
+    Task.prototype.deleteTask(projectArray, index, task);
   });
 
 

@@ -1,5 +1,10 @@
-const space = document.getElementById('space')
-export default function newTaskFormDOM(selectArray) {
+import Project from "./project.js";
+import ProjectManager from "./projectManager.js";
+import { theManager } from "./index.js";
+import Task from "./todo.js";
+const space = document.getElementById('space');
+
+export default function newTaskFormDOM(selectArray, allProjectFolder) {
     const formContainer = document.createElement('div');
     formContainer.classList.add('form-container');
 
@@ -18,7 +23,7 @@ export default function newTaskFormDOM(selectArray) {
     titleInput.id = 'projectTitle';
     titleInput.name = 'title';
     titleInput.required = true;
-    titleInput.style.height = '50px'
+    titleInput.style.height = '50px';
     
     const descriptionLabel = document.createElement('label');
     descriptionLabel.textContent = 'Description:';
@@ -28,6 +33,7 @@ export default function newTaskFormDOM(selectArray) {
     descriptionInput.className = 'form-control';
     descriptionInput.id = 'projectDescription';
     descriptionInput.name = 'description';
+    descriptionInput.maxLength = 40
     descriptionInput.required = true;
     
     const dueDateLabel = document.createElement('label');
@@ -39,7 +45,8 @@ export default function newTaskFormDOM(selectArray) {
     dueDateInput.className = 'form-control';
     dueDateInput.id = 'projectDueDate';
     dueDateInput.name = 'dueDate';
-    dueDateInput.style.height = '50px'
+    dueDateInput.style.height = '50px';
+    dueDateInput.required = true;
     
     const priorityLabel = document.createElement('label');
     priorityLabel.textContent = 'Priority:';
@@ -51,14 +58,14 @@ export default function newTaskFormDOM(selectArray) {
     prioritySelect.id = 'projectPriority';
     prioritySelect.name = 'priority';
     prioritySelect.required = true;
-    prioritySelect.style.height = '50px'
+    prioritySelect.style.height = '50px';
     
     const priorityOptions = ['Low', 'Medium', 'High'];
     priorityOptions.forEach(optionText => {
-      const option = document.createElement('option');
-      option.value = optionText.toLowerCase();
-      option.textContent = optionText;
-      prioritySelect.appendChild(option);
+        const option = document.createElement('option');
+        option.value = optionText.toLowerCase();
+        option.textContent = optionText;
+        prioritySelect.appendChild(option);
     });
     
     const submitButton = document.createElement('button');
@@ -89,38 +96,40 @@ export default function newTaskFormDOM(selectArray) {
     formContainer.appendChild(form);
 
     form.addEventListener('submit', (e) => {
-
-      function formatDateToDMY(date) {
-        const [year, month, day] = date.split('-'); // Assuming the date is initially in 'year-month-day' format
-        const dateObject = new Date(year, month - 1, day); // Create a Date object
+        function formatDateToDMY(date) {
+            const [year, month, day] = date.split('-'); // Assuming the date is initially in 'year-month-day' format
+            const dateObject = new Date(year, month - 1, day); // Create a Date object
+            
+            const dayName = dateObject.toLocaleDateString('en-US', { weekday: 'long' }); // Get the day name
+            const formattedDate = `${day}/${month}/${year}`;
+            
+            return `${dayName}, ${formattedDate}`;
+        }
         
-        const dayName = dateObject.toLocaleDateString('en-US', { weekday: 'long' }); // Get the day name
-        const formattedDate = `${day}/${month}/${year}`;
+        e.preventDefault();
         
-        return `${dayName}, ${formattedDate}`;
-      }
-      
-      e.preventDefault();
-      const title = titleInput.value;
-      const description = descriptionInput.value;
-      const dueDate = dueDateInput.value
-      const priority = prioritySelect.value;
+        if (!dueDateInput.value) {
+            dueDateInput.classList.add('is-invalid');
+            return;
+        } else {
+            dueDateInput.classList.remove('is-invalid');
+        }
 
-      const theNewTask = {
-        title: title,
-        description: description,
-        dueDate: formatDateToDMY(dueDate),
-        priority: priority,
-        isCompleted: false
-      };
+        const title = titleInput.value;
+        const description = descriptionInput.value;
+        const dueDate = dueDateInput.value;
+        const priority = prioritySelect.value;
 
-      selectArray.push(theNewTask);
-      console.log(selectArray);
-      formContainer.style.display = 'none'; // Hide the form after submission
+     
+        const newTask = new Task(title, description, formatDateToDMY(dueDate), priority, false);
+
+        selectArray.push(newTask);
+        theManager().refresher(selectArray);
+        
+        formContainer.style.display = 'none'; // Hide the form after submission
     });
     
-
-    space.append(formContainer)
+    space.append(formContainer);
     
     return formContainer;
 }

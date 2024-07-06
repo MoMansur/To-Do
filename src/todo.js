@@ -1,6 +1,8 @@
 import ProjectManager from "./projectManager.js";
 import newTaskFormDOM from "./taskForm.js";
 
+import { theManager } from "./index.js";
+const space = document.getElementById('space')
 
 export default class Task {
   constructor(title, description, dueDate, priority, isCompleted = false) {
@@ -10,8 +12,6 @@ export default class Task {
     this.priority = priority;
     this.isCompleted = isCompleted;
   }
-
-  
 
   completedFunc(checkbox) {
     this.isCompleted = checkbox.checked;
@@ -23,27 +23,24 @@ export default class Task {
     const projects = JSON.parse(localStorage.getItem('projects')) || [];
     task.isCompleted = status
     localStorage.setItem('projects', JSON.stringify(projects));
+    theManager().saveProjects()
   }
   
   deleteTask(project, index) {
     const comfirm = confirm('Are you sure you want to delete this Task?')
     const projects = JSON.parse(localStorage.getItem('projects')) || [];
-  
-
+      
     if(comfirm){
       project.splice(index, 1);
       localStorage.setItem('projects', JSON.stringify(projects));
       document.querySelector(`.card.task-card[data-index="${index}"]`).remove();
-      
-    }else{
-
     }
- 
   }
-  
-  editTask(task, projectId, taskId, card) {
+
+
+  editTask(task, index, card) {
     const formContainer = newTaskFormDOM([]);
-    document.body.appendChild(formContainer);
+    space.appendChild(formContainer);
   
     const form = formContainer.querySelector('form');
     const titleInput = form.querySelector('#projectTitle');
@@ -61,30 +58,31 @@ export default class Task {
   
       task.title = titleInput.value;
       task.description = descriptionInput.value;
-      task.dueDate = dueDateInput.value;
+      task.dueDate = this.formatDateToDMY(dueDateInput.value);
       task.priority = prioritySelect.value;
   
       const projects = JSON.parse(localStorage.getItem('projects')) || [];
-      const project = projects.find(proj => proj.id === projectId);
-      if (project) {
-        const taskToUpdate = project.tasks[taskId];
-        if (taskToUpdate) {
-          taskToUpdate.title = task.title;
-          taskToUpdate.description = task.description;
-          taskToUpdate.dueDate = formatDateToDMY(task.dueDate);
-          taskToUpdate.priority = task.priority;
-          localStorage.setItem('projects', JSON.stringify(projects));
-  
-          card.querySelector('.card-title').textContent = task.title;
-          card.querySelector('.description').textContent = task.description;
-          card.querySelector('.fa-calendar-day').parentElement.innerHTML = `<small class="text-muted"><i class="fas fa-calendar-day"></i> ${task.dueDate}</small>`;
-          card.querySelector('.fa-flag').parentElement.innerHTML = `<small class="text-muted"><i class="fas fa-flag"></i> ${task.priority}</small>`;
-        }
-      }    
+    
+      localStorage.setItem('projects', JSON.stringify(projects));
+
+      theManager().saveProjects()
+
+      // theManager().refresher(task)
       formContainer.style.display = 'none';
     });
     formContainer.style.display = 'block';
   }
+
+  formatDateToDMY(date) {
+    const [year, month, day] = date.split('-'); // Assuming the date is initially in 'year-month-day' format
+    const dateObject = new Date(year, month - 1, day); // Create a Date object
+    
+    const dayName = dateObject.toLocaleDateString('en-US', { weekday: 'long' }); // Get the day name
+    const formattedDate = `${day}/${month}/${year}`;
+    
+    return `${dayName}, ${formattedDate}`;
+  }
+  
   
 }
 

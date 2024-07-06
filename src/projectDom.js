@@ -94,7 +94,6 @@ const modal = (function() {
     // Function to close the modal
     function closeModal() {
       modalContainer.style.display = 'none';
-      resetForm();
     }
   
     // Function to open the modal
