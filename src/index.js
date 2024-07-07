@@ -1,6 +1,4 @@
 import ProjectManager from "./projectManager.js";
-import todoFunctions from "./functions.js";
-import createSettingsPage from "./settingsDom.js";
 
 // Initialize ProjectManager
 const myProjectManager = new ProjectManager();
@@ -75,9 +73,7 @@ sidebarIcon.addEventListener('click', () => {
   isClicked = !isClicked;
 });
 
-// settingsDropdown.addEventListener('click', () => {
-//   createSettingsPage(taskSpace, userName);
-// });
+
 
 // Dropdown toggle functionality
 document.addEventListener('DOMContentLoaded', function() {
