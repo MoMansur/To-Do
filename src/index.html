@@ -17,10 +17,9 @@
             </button>
             <h1 class="NavText text-center flex-grow-1">Todo List</h1>
             
-            <!-- Profile Icon with Dropdown -->
             <div class="dropdown ms-auto">
                 <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                    <i class="fas fa-user-circle fa-lg"></i> John Doe <!-- Replace with actual user name -->
+                    <i class="fas fa-user-circle"></i> <span id="navUserName">John User</span>
                 </button>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
                     <li><a class="dropdown-item" href="#"><i class="fas fa-cog"></i> Settings</a></li>
@@ -32,10 +31,8 @@
         </div>
     </nav>
     
+    
     <div class="container-fluid" id="container">
-   
-        
-
         <div class="row">
           <div class="sidebar col-2 bg-primary" id="sidebarContainer">
               <div class="defaultItems">
@@ -115,7 +112,7 @@
                 </div>
             </div>
               <div id="taskSpace" style="border: 1px solid #ccc; border-radius: 5px;">
-                  <h2 id="title">My Todos Project</h2>
+                  <h2 id="title" style="margin: 10px;">My Todos Project</h2>
                   <div id="space" style="padding: 20px;width: 100%; border: 1px solid #ccc; border-radius: 5px;">
                       <!-- Task content will be loaded here -->
                   </div>

@@ -1,12 +1,16 @@
-const taskSpace = document.getElementById('taskSpace');
+import { newUserFunc } from "./profile.js";
+
+const space = document.getElementById('space');
 const settingsIcon = document.getElementById('settingsIcons');
+const title = document.getElementById('title')
 const userName = document.getElementById('userName');
 
 
 // Function to create and export the settings page
 export default function createSettingsPage(taskSpace, userName) {
     // Clear existing content in taskSpace
-    taskSpace.innerHTML = '';
+    title.innerHTML = 'Setting'
+    space.innerHTML = '';
 
     // Settings Page Elements
     const settingsContainer = document.createElement('div');
@@ -31,8 +35,8 @@ export default function createSettingsPage(taskSpace, userName) {
         const newUsername = usernameInput.value.trim();
         if (newUsername !== '') {
             userName.textContent = newUsername;
-            // You can save the new username to localStorage or send it to a server here
-            console.log('Username changed to:', newUsername);
+         
+            newUserFunc(newUsername, bgColorSection)
         } else {
             alert('Please enter a valid username.');
         }
@@ -63,7 +67,7 @@ export default function createSettingsPage(taskSpace, userName) {
     bgColorSelect.addEventListener('change', () => {
         const selectedColor = bgColorSelect.value.toLowerCase();
         if (selectedColor === 'default') {
-            taskSpace.style.backgroundColor = ''; // Reset to default
+            taskSpace.style.backgroundColor = ''; 
         } else {
             taskSpace.style.backgroundColor = selectedColor;
         }
@@ -76,7 +80,7 @@ export default function createSettingsPage(taskSpace, userName) {
     settingsContainer.appendChild(usernameSection);
     settingsContainer.appendChild(bgColorSection);
 
-    // Append Settings Container to taskSpace
-    taskSpace.appendChild(settingsContainer);
+
+    space.appendChild(settingsContainer);
 }
 

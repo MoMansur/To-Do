@@ -1,6 +1,7 @@
 import Project from "./project.js";
 import modal from "./projectDom.js";
 import { loadProjectsFromLocalStorage, saveProjectsToLocalStorage } from './localStorage.js';
+import newTaskFormDOM from "./taskForm.js";
 
 const space = document.getElementById('space');
 
@@ -19,33 +20,21 @@ export default class ProjectManager {
 //Methods Below
 
 homePage(){
-
-
-  this.displayer()
-  this.newProjectBtn()
-  
- 
   title.innerHTML = `Home`
+  this.displayer()
+ 
+}
 
-}
-newProjectBtn() {
-  const newProjectBtn = document.createElement('button');
-  newProjectBtn.textContent = 'Add Project';
-  newProjectBtn.id = 'addProject';
-  newProjectBtn.className = 'btn btn-primary';
-  newProjectBtn.style.width = '100%';
-  space.append(newProjectBtn);
-}
    allTodos(){
     space.innerHTML = ""
-    title.innerText = 'All My Todos'
+    title.innerText = 'All Todos'
     
    
     this.allProjectFolder.forEach(todo =>{
       const allTodosVar = todo.project
       if(allTodosVar === ''){space.innerHTML = '<h4>No Task Found</h4>'}
-      // Project.prototype.simpleDisplayer(allTodosVar)
-      this.getSelectedProjectArray(allTodosVar)
+      Project.prototype.simpleDisplayer(allTodosVar)
+      // this.getSelectedProjectArray(allTodosVar)
       console.log(allTodosVar)
     })
   }
@@ -73,23 +62,34 @@ newProjectBtn() {
       space.innerHTML = '<h4>No Completed Task Found</h4>';
     }
   }
-
-  pendingTodo(){
+  pendingTodo() {
     space.innerHTML = "";
-    title.innerText = 'All My Completed Tasks';
-    
+    title.innerText = 'All My Pending Tasks';
+  
+    const today = new Date();
+  
+    const pendingTasks = [];
+  
     this.allProjectFolder.forEach(projects => {
       projects.project.forEach(task => {
-        if (task.isCompleted === false) {
-          const arr = projects.project
-          Project.prototype.simpleDisplayer(arr);
-       
-          if(arr === ''){space.innerHTML = '<h4>No Upcoming Task Found</h4>'}
-
+        const dueDate = new Date(task.dueDate); // Assuming task.dueDate is in a parseable date format
+  
+        if (task.isCompleted === false && today <= dueDate) {
+          pendingTasks.push(task);
         }
       });
     });
+  
+    if (pendingTasks.length > 0) {
+      pendingTasks.forEach(task => {
+        // Assuming Project.prototype.simpleDisplayer takes an array of tasks and displays them
+        Project.prototype.simpleDisplayer([task]);
+      });
+    } else {
+      space.innerHTML = '<h4>No Pending Tasks Found</h4>';
+    }
   }
+  
 
   todayTodos() {
     const today = new Date();
@@ -115,6 +115,33 @@ newProjectBtn() {
     console.log(localDate); 
   }
 
+  missedTasks(){
+    space.innerHTML = "";
+  title.innerText = 'All My Missed Tasks';
+  const today = new Date();
+
+  const missedTasks = [];
+
+  this.allProjectFolder.forEach(projects => {
+    projects.project.forEach(task => {
+      const dueDate = new Date(task.dueDate); // Assuming task.dueDate is in a parseable date format
+
+      if (task.isCompleted === false && today > dueDate) {
+        missedTasks.push(task);
+      }
+    });
+  });
+
+  if (missedTasks.length > 0) {
+    missedTasks.forEach(task => {
+      // Assuming Project.prototype.simpleDisplayer takes an array of tasks and displays them
+      Project.prototype.simpleDisplayer([task]);
+    });
+  } else {
+    space.innerHTML = '<h4>No Missed Tasks Found</h4>';
+  }
+  }
+
   loadProjects() {
     this.allProjectFolder = loadProjectsFromLocalStorage();
   }
@@ -132,14 +159,35 @@ newProjectBtn() {
 
   displayer() {
     space.innerHTML = "";
+    title.innerHTML = `Home`
     this.projectPageandSideBarDOM(this.allProjectFolder);
-    this.newProjectForm(this.allProjectFolder);  
+    this.newProjectBtn()
+    this.footer()
+
+  }
+
+  newProjectBtn() {
+    const newProjectBtn = document.createElement('button');
+    newProjectBtn.textContent = 'Add Project';
+    newProjectBtn.id = 'addProject';
+    newProjectBtn.className = 'btn btn-primary';
+    newProjectBtn.style.width = '100%';
+    space.append(newProjectBtn);
+  
+    newProjectBtn.addEventListener('click', ()=>{
+      modal.openModal()
+      this.newProjectForm(this.allProjectFolder)
+    })
   }
 
   deleteProject(index) {
-    this.allProjectFolder.splice(index, 1);
-    this.saveProjects();
-    this.projectPageandSideBarDOM(this.allProjectFolder);
+    const comfirm = confirm('Are you sure you want to delete this Task?')
+    if(comfirm){
+      this.allProjectFolder.splice(index, 1);
+      this.saveProjects();
+      this.projectPageandSideBarDOM(this.allProjectFolder);
+      this.newProjectBtn()
+    }
   }
 
   newProjectForm(project) {
@@ -157,89 +205,126 @@ newProjectBtn() {
       this.addNewProject(id, name, color,);
       this.projectPageandSideBarDOM(project);
       modal.closeModal();
+      this.newProjectBtn()
     });
+  
   }
 
   getSelectedProjectArray(array) {
     Project.prototype.simpleDisplayer(array);
-
     this.saveProjects();
     return array;
   }
 
- 
-
   refresher(disArray) {
-    Project.prototype.displayer(disArray)
+    Project.prototype.simpleDisplayer(disArray)
     this.saveProjects()
   }
-
-
 
   projectPageandSideBarDOM(projects) {
     const newProjectUL = document.getElementById('newProjectUL');
     newProjectUL.innerHTML = "";
     space.innerHTML = "";
 
-    title.innerText = 'My Projects';
-    title.style.alignItems = 'center';
+    newProjectUL.innerHTML = "";
+  space.innerHTML = "";
 
-    const projectList = document.createElement('ul');
-    projectList.style.listStyleType = 'none';
-    projectList.style.padding = '0';
+  title.innerText = 'My Projects';
 
-    projects.forEach((project, index) => {
-      const listItem = document.createElement('li');
-      listItem.className = 'list-group-item';
-      listItem.id = 'projectFolder';
-      listItem.setAttribute('data-index', index);
+  projects.forEach((project, index) => {
+    // Sidebar Project List
+    const listItem = document.createElement('li');
+listItem.className = 'list-group-item';
+listItem.id = 'projectFolder';
+listItem.setAttribute('data-index', index);
 
-      const icon = document.createElement('i');
-      icon.className = 'fa-solid fa-hashtag';
-      icon.style.color = project.color;
-      icon.style.fontWeight = '100';
-      listItem.append(icon);
-      listItem.append(document.createTextNode(project.name));
+const icon = document.createElement('i');
+icon.className = 'fa-solid fa-folder project-icon'; // Use folder icon
+icon.style.color = project.color; // Set icon color to project color
+// icon.style.fontWeight = '500';
 
-      listItem.style.backgroundColor = 'White';
-      listItem.addEventListener('click', () => {
-        let getProjectArray = project.project;
 
-        Project.prototype.displayer(getProjectArray);
-        title.innerText = project.name;
-      });
 
-      const listItemTaskSpace = document.createElement('li');
-      listItemTaskSpace.className = 'project-item';
-      listItemTaskSpace.style.padding = '10px';
-      listItemTaskSpace.style.borderBottom = '1px solid #ccc';
-      listItemTaskSpace.innerText = project.name;
-      listItemTaskSpace.setAttribute('data-index', index);
+const projectName = document.createElement('span');
+projectName.className = 'project-name';
+projectName.textContent = project.name;
 
-      const deleteIcon = document.createElement('i');
-      deleteIcon.className = 'fa-solid fa-trash';
-      deleteIcon.id = 'deleteIcon';
-      deleteIcon.style.float = 'right';
-      deleteIcon.style.cursor = 'pointer';
+listItem.append(icon);
+listItem.append(projectName);
 
-      deleteIcon.addEventListener('click', (e) => {
-        e.stopPropagation();
-        const index = parseInt(listItemTaskSpace.getAttribute("data-index"));
-        this.deleteProject(index);
-      });
 
-      listItemTaskSpace.appendChild(deleteIcon);
-      projectList.appendChild(listItemTaskSpace);
+listItem.style.backgroundColor = 'White';
+listItem.addEventListener('click', () => {
+  let getProjectArray = project.project;
+  Project.prototype.displayer(getProjectArray);
+  title.innerText = project.name;
+});
 
-      listItemTaskSpace.addEventListener('click', () => {
-        let getProjectArray = project.project;
-        Project.prototype.displayer(getProjectArray);
-        title.innerText = project.name;
-      });
+newProjectUL.append(listItem);
 
-      space.append(projectList);
-      newProjectUL.append(listItem);
+    // Main Space Project Cards
+    const listItemTaskSpace = document.createElement('li');
+    listItemTaskSpace.className = 'project-card';
+    listItemTaskSpace.setAttribute('data-index', index);
+
+    const cardIcon = document.createElement('i');
+    cardIcon.className = 'fa-solid fa-folder project-card-icon';
+    cardIcon.style.color = project.color; 
+    listItemTaskSpace.append(cardIcon);
+
+    const cardTitle = document.createElement('span');
+    cardTitle.className = 'project-card-title';
+    cardTitle.innerText = project.name;
+    listItemTaskSpace.append(cardTitle);
+
+    const deleteIcon = document.createElement('i');
+    deleteIcon.className = 'fa-solid fa-trash delete-icon';
+    deleteIcon.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const index = parseInt(listItemTaskSpace.getAttribute("data-index"));
+      this.deleteProject(index);
     });
-  }
+
+    listItemTaskSpace.appendChild(deleteIcon);
+    space.append(listItemTaskSpace);
+
+    listItemTaskSpace.addEventListener('click', () => {
+      let getProjectArray = project.project;
+      Project.prototype.displayer(getProjectArray);
+      title.innerText = project.name;
+    });
+  });
+}
+
+footer(){
+  // Create the footer element
+const footer = document.createElement('footer');
+footer.innerHTML = '&copy; 2024 by Mo_Mansur ';
+
+const link = document.createElement('a');
+link.href = "https://github.com/MoMansur";
+link.className = "link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover";
+
+// Create the image element
+// const img = document.createElement('img');
+// img.src = "./img/github.png";
+// img.alt = "github";
+
+// // Append the image to the link
+// link.appendChild(img);
+
+
+const linkText = document.createTextNode(" Mo_Mansur GitHub");
+link.appendChild(linkText);
+footer.appendChild(link);
+
+const remainingText = document.createTextNode(". All rights reserved.");
+footer.appendChild(remainingText);
+
+footer.style.textAlign = 'center'
+
+space.appendChild(footer);
+
+}
 }
 

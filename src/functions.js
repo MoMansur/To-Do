@@ -1,25 +1,16 @@
 import newTaskFormDOM from "./taskForm.js";
-import createSettingsPage from "./settings.js";
+import createSettingsPage from "./settingsDom.js";
 
 
 function todoFunctions(theDiv){
 const settingsIcon = document.getElementById('settingsIcon');
-const userName = document.getElementById('userName');
+const sideBaruserName = document.getElementById('userName');
+const navUserName = document.getElementById('navUserName')
 settingsIcon.addEventListener('click', ()=>{
     createSettingsPage(theDiv, userName)
 })
 
 
-// const addTaskBtn = document.getElementById('addTask')
-// let isOn =  true
-// addTaskBtn.addEventListener('click', ()=>{
-//     if(isOn){
-//         theDiv.appendChild(newTaskFormDOM())
-//     }else{
-//        newTaskFormDOM().remove()
-//     }
-//     isOn = !isOn
-// })
 
 
 };

@@ -1,199 +1,196 @@
-*{
-  margin: 0px;
-  padding: 0px;
-}
-
-body{
+* {
   margin: 0;
   padding: 0;
 }
-#container{
-    min-height: 100vh;
+
+body {
+  margin: 0;
+  padding: 0;
+ 
 }
 
-nav{
-    height: 90px;
-    border-bottom-right-radius: 20px;
-    border-bottom-left-radius: 20px;
-    margin-bottom: 5px;
-    display: inline-flex;
-    justify-content: space-between;
-    align-items: center;
+#container {
+  min-height: 100vh;
 }
 
-h1{
-  text-align: center;
-  color: white;
+nav {
+  /* height: 90px; */
+  border-bottom-right-radius: 20px;
+  border-bottom-left-radius: 20px;
+  margin-bottom: 5px;
+  display: inline-flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-#sidebarIcon{
+
+
+
+
+.dropdown-menu li i{
+  font-size: 2rem;
+  background-color: #007bff;
+}
+
+
+.sidebar {
+  padding: 10px;
+  background-color: lightskyblue;
+  min-height: 98vh;
+  margin: 0;
+  border-top-right-radius: 10px;
+}
+
+#sidebarIcon {
   color: white;
   font-size: 2rem;
-
-}
-.sidebar{
-    padding: 10px;
-    background-color: lightskyblue;
-    min-height: 98vh;
-    margin: 0px;
-    border-top-right-radius: 10px;
-    /* display: none; */
 }
 
-i{
-    font-size: 1.7rem;
-    margin: 5px;
-    
+i {
+  font-size: 1.7rem;
+  margin: 5px;
 }
 
-ul{
-    font-size: 2rem;
+ul {
+  font-size: 2rem;
 }
 
-li{
-    list-style: none;
-    margin: 10px;
-    font-size: 1.5rem;
-    margin-left: 0px;
-    background-color: rgb(220, 246, 254);
-    cursor: pointer;
+li {
+  list-style: none;
+  margin: 10px;
+  font-size: 1.5rem;
+  margin-left: 0px;
+  background-color: rgb(220, 246, 254);
+  cursor: pointer;
+}
+
+.list-group-item {
+  background-color: rgb(0, 68, 110);
+}
+
+#search {
+  background-color: lightblue;
+}
+
+#defaultItemsBox li {
+  background-color: rgb(220, 246, 254);
+  border: none;
+}
+
+#defaultItemsBox li:hover,
+#defaultItemsBox li:active {
+  background-color: rgb(107, 210, 241);
+}
+
+.projectItems {
+  width: 100%;
+  margin-left: 0px;
 }
 
 
-.list-group-item{
-    background-color: rgb(0, 68, 110);
-}
-#search{
-    background-color: lightblue;
+
+.projectUL li {
+  background-color: rgb(220, 246, 254);
+  border: none;
 }
 
-#defaultItemsBox li{
-    background-color: rgb(220, 246, 254);
-    border: none;
-}
-#defaultItemsBox li:hover{
-    background-color:rgb(107, 210, 241);
-
-}
-#defaultItemsBox li:active{
-    background-color:rgb(107, 210, 241);
-
+.btn {
+  height: 50px;
+  font-weight: bolder;
 }
 
-.projectItems{
-    /* background-color: rgb(13, 151, 151); */
-    width: 100%;
-    margin-left: 0px;
-}
-.projectUL li{
-    background-color: rgb(220, 246, 254);
-    border: none;
-}
-
-.btn{
-    height: 50px;
-    font-weight: bolder;
-}
-
-#search{
-    height: 50px;
-}
-
-#deleteProject i:hover{
+#deleteProject i:hover {
   background-color: red;
   color: red;
 }
 
-.projectUL li:hover{
+.projectUL li:hover {
   background-color: rgb(146, 200, 218);
   border-radius: 5px;
 }
 
 .user-nav {
-    display: flex;
-    align-items: center;
-    padding: 10px;
-    font-size: 1.8rem;
-    background-color: aliceblue;
-    border-radius: 5px;
-    margin-bottom: 10px;
-  }
-  .user-avatar {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    background-color: #1786e8;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    
-    margin-right: 10px;
-  }
-  .user-name {
-    flex-grow: 1;
-  }
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  font-size: 1.8rem;
+  background-color: aliceblue;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
 
-  .projectSpace{
-    background-color: lightskyblue;
-    border: 1px solid black;
-    margin: 10px;
-    padding: 10px;
-    min-height: 80vh;
-    border-radius: 20px;
-  }
+.user-avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: #1786e8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  margin-right: 10px;
+}
 
-  .task-card {
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  .task-card .card-body {
-    padding: 15px;
-  }
-  
-  .task-card .card-title {
-    margin-bottom: 10px;
-  }
-  
-  .task-card .card-text {
-    margin-bottom: 5px;
-  }
-  
-  .task-card .card-text.description {
-    font-size: 1.1em;
-  }
-  
-  .task-card .card-text.priority {
-    font-size: 1.1em;
-  }
-  
-  .task-card .bg-primary {
-    background-color: #007bff !important;
-  }
-  
-  @media (max-width: 767px) {
-    .task-card .col-md-2 {
-      flex: 0 0 100%;
-      max-width: 100%;
-      text-align: center;
-      padding: 10px;
-    }
-  
-    .task-card .col-md-10 {
-      flex: 0 0 100%;
-      max-width: 100%;
-    }
-  }
-  #divForCheckBox{
-    background-color: #a8d0fb;
-    border: 1px solid black;
-    padding: 10px;
-    border-radius: 10px;
+.user-name {
+  flex-grow: 1;
+}
 
+.projectSpace {
+  background-color: lightskyblue;
+  border: 1px solid black;
+  margin: 10px;
+  padding: 10px;
+  min-height: 80vh;
+  border-radius: 20px;
+}
+
+.task-card {
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.task-card .card-body {
+  padding: 15px;
+}
+
+.task-card .card-title {
+  margin-bottom: 10px;
+}
+
+.task-card .card-text {
+  margin-bottom: 5px;
+}
+
+.task-card .card-text.description {
+  font-size: 1.1em;
+}
+
+.task-card .card-text.priority {
+  font-size: 1.1em;
+}
+
+.task-card .bg-primary {
+  background-color: #007bff !important;
+}
+
+@media (max-width: 767px) {
+  .task-card .col-md-2,
+  .task-card .col-md-10 {
+    flex: 0 0 100%;
+    max-width: 100%;
+    text-align: center;
+    padding: 10px;
   }
-/* Ensure this is included in your CSS file */
+}
+
+#divForCheckBox {
+  background-color: #a8d0fb;
+  border: 1px solid black;
+  padding: 10px;
+  border-radius: 10px;
+}
+
 .form-container {
   position: fixed;
   top: 50%;
@@ -226,6 +223,7 @@ li{
 .popup-form button {
   margin-top: 10px;
 }
+
 .overlay {
   position: fixed;
   top: 0;
@@ -237,14 +235,12 @@ li{
   display: none; /* Hidden by default */
 }
 
-
-#titleContainer{
+#titleContainer {
   display: flex;
   flex-direction: column;
   height: auto;
   padding: 5px;
 }
-
 
 .label-container {
   padding: 5px;
@@ -252,36 +248,31 @@ li{
   justify-content: space-between;
   font-size: 1.4rem;
   border-top: rgb(182, 182, 182);
-
 }
 
-
-#buttonContainer{
+#buttonContainer {
   display: flex;
   justify-content: space-between;
   padding: 10px;
 }
 
-
-#elementContainer{
+#elementContainer {
   padding: 10px;
   font-size: 1.5rem;
 }
 
-#carddescription{
+#carddescription {
   display: flex;
-  flex-wrap:  wrap;
-
+  flex-wrap: wrap;
 }
 
-.checkbox-span{
+.checkbox-span {
   background-color: lightgray;
   display: flex;
   padding: 5px;
   height: 60px;
   border-radius: 5px;
 }
-
 
 .element-container {
   display: flex;
@@ -293,11 +284,11 @@ li{
 
 .card-text.description {
   word-wrap: break-word;
-  word-break:break-all;
+  word-break: break-all;
   max-width: 300px;
   width: auto;
   height: auto;
-  border: 1px solid rgb(203, 203, 203); 
+  border: 1px solid rgb(203, 203, 203);
   padding: 5px;
   border-radius: 10px;
 }
@@ -331,104 +322,262 @@ li{
   margin-right: 15px;
 }
 
-.NavText {
-  font-size: 1.5rem; /* Adjust font size as needed */
-  color: white; /* Text color */
-  margin-top: 0; /* Remove default top margin */
-  margin-bottom: 0; /* Remove default bottom margin */
-  font-weight: bold; /* Make the font bold */
-}
+
 
 .dropdown-toggle {
-  background-color: transparent; /* Remove background color */
-  border: none; /* Remove border */
-  color: white; /* Text color */
+  background-color: transparent;
+  border: none;
+  color: white;
 }
 
 .dropdown-toggle:hover {
-  color: white; 
+  color: white;
 }
 
 .dropdown-menu {
-  background-color: #343a40; 
+  background-color: #343a40;
 }
 
-#navMenuRow{
+#navMenuRow {
   display: none;
 }
 
-/*RESPONSIVE*/
 @media (max-width: 500px) {
- 
-  #sidebarContainer{
+  #sidebarContainer {
     display: none;
   }
-  
-#navMenuRow{
-  display: block;
-}
+
+  #navMenuRow {
+    display: block;
+  }
 
   .card-text.description {
     word-wrap: break-word;
-    word-break:break-all;
+    word-break: break-all;
     max-width: 220px;
     width: auto;
     height: auto;
-    border: 1px solid rgb(203, 203, 203); 
+    border: 1px solid rgb(203, 203, 203);
     padding: 5px;
     border-radius: 10px;
   }
 
-  #mainSpaceCol{
+  #mainSpaceCol {
     width: 100%;
   }
-  
-  
-.navMenu .nav-item{
-  padding: 5px;
-  margin: 1px;
+
+  .navMenu .nav-item {
+    /* padding: 5px; */
+    margin: 1px;
+  }
+
+  .navMenu {
+    padding: 10px;
+  }
+
+  #deletebtnOfTask {
+    font-size: 0px;
+  }
+
+  #editBtnOfTask {
+    font-size: 0px;
+  }
+
+  #checkBoxSpanOfTask {
+    margin: 0px;
+  }
+
+  #carddescription {
+    display: none;
+  }
+
+  .label {
+    font-size: 0px;
+    color: #007bff;
+  }
+
+  #sidebarIcon {
+    display: none;
+  }
 }
 
-.navMenu{
-  padding: 10px;
-}
-
-#deletebtnOfTask{
-  font-size: 0px;
-}
-
-#editBtnOfTask{
-  font-size: 0px;
-}
-
-#checkBoxSpanOfTask{
-  margin: 0px;
-}
-
-
-#carddescription{
-  display: none; 
-}
-
-.label{
-  font-size: 0px;
-  color: #007bff;
-}
-
-#sidebarIcon{
-  display: none;
-}
-  
-}
-
-label{
+label {
   display: inline-flex;
 }
 
-
 @media (max-width: 400px) {
-.label{
-  font-size: 0px;
-  color: #007bff;
+  .label {
+    font-size: 0px;
+    color: #007bff;
+  }
 }
+
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  background-color: #007bff;
+  color: white;
+}
+
+.NavText {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.ms-auto {
+  margin-left: auto;
+}
+
+.navbar-toggler {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.navbar-toggler-icon {
+  display: inline-block;
+  width: 1.5rem;
+  height: 1.5rem;
+  background-color: white;
+  border-radius: 0.25rem;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-toggle {
+  background-color: transparent;
+  border: none;
+  color: white;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  right: 0;
+  background-color: #343a40;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-menu.show {
+  display: block;
+}
+
+.dropdown-menu-end {
+  right: 0;
+}
+
+.dropdown-item {
+  color: white;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-item:hover {
+  background-color: #575757;
+}
+
+.dropdown-divider {
+  height: 1px;
+  margin: 0.5rem 0;
+  overflow: hidden;
+  background-color: #e9ecef;
+}
+
+
+
+/* Styling for the project list and cards */
+#newProjectUL {
+  list-style-type: none;
+  padding: 0;
+}
+
+.project-card {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 10px;
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.project-card-icon {
+  color: #007bff;
+  font-size: 2rem;
+  margin-right: 10px;
+}
+
+.project-card-title {
+  flex-grow: 1;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.delete-icon {
+  color: #dc3545;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.delete-icon:hover {
+  color: #ff0000;
+}
+
+
+/* Style for the folder-like list item */
+/* Style for the folder-like list item */
+.list-group-item {
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 15px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.list-group-item:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.project-icon {
+  font-size: 1.5rem;
+  margin-right: 10px;
+  transition: color 0.3s ease;
+}
+
+.project-delete-icon {
+  margin-left: auto;
+  color: red;
+  cursor: pointer;
+}
+
+.project-name {
+  font-size: 1.2rem;
+  font-weight: bold;
 }
