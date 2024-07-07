@@ -1,10 +1,8 @@
-import Project from "./project.js";
-import ProjectManager from "./projectManager.js";
 import { theManager } from "./index.js";
 import Task from "./todo.js";
 const space = document.getElementById('space');
 
-export default function newTaskFormDOM(selectArray, allProjectFolder) {
+export default function newTaskFormDOM(selectArray) {
     const formContainer = document.createElement('div');
     formContainer.classList.add('form-container');
 

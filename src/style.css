@@ -1,15 +1,21 @@
+*{
+  margin: 0px;
+  padding: 0px;
+}
 
+body{
+  margin: 0;
+  padding: 0;
+}
 #container{
     min-height: 100vh;
 }
 
-.nav{
+nav{
     height: 90px;
-    background-color: lightblue;
-    border: 3px solid white;
     border-bottom-right-radius: 20px;
     border-bottom-left-radius: 20px;
-    margin-bottom: 30px;
+    margin-bottom: 5px;
     display: inline-flex;
     justify-content: space-between;
     align-items: center;
@@ -235,29 +241,20 @@ li{
 #titleContainer{
   display: flex;
   flex-direction: column;
-  height: 100px;
+  height: auto;
+  padding: 5px;
 }
 
 
 .label-container {
+  padding: 5px;
   display: flex;
   justify-content: space-between;
-  width: 100%;
-  padding: 10px;
-  color: rgb(255, 210, 210);
-  border-top: 1px solid #909090; ;
-  height: 20px;
-  line-height: 10px;
-  font-size: 1.1rem;
-  /* background-color: #b9b9b9; */
-  /* border: 1px solid #dee2e6; */
-  /* border-radius: 5px; */
+  font-size: 1.4rem;
+  border-top: rgb(182, 182, 182);
+
 }
 
-.label {
-  margin-right: 15px;
-  font-weight: bold;
-}
 
 #buttonContainer{
   display: flex;
@@ -296,8 +293,13 @@ li{
 
 .card-text.description {
   word-wrap: break-word;
-  border: 1px solid olive;
- 
+  word-break:break-all;
+  max-width: 300px;
+  width: auto;
+  height: auto;
+  border: 1px solid rgb(203, 203, 203); 
+  padding: 5px;
+  border-radius: 10px;
 }
 
 .big-checkbox {
@@ -322,8 +324,111 @@ li{
   justify-content: space-between;
   width: 100%;
   margin-bottom: 10px;
+  padding-left: 10px;
 }
 
 .label {
   margin-right: 15px;
+}
+
+.NavText {
+  font-size: 1.5rem; /* Adjust font size as needed */
+  color: white; /* Text color */
+  margin-top: 0; /* Remove default top margin */
+  margin-bottom: 0; /* Remove default bottom margin */
+  font-weight: bold; /* Make the font bold */
+}
+
+.dropdown-toggle {
+  background-color: transparent; /* Remove background color */
+  border: none; /* Remove border */
+  color: white; /* Text color */
+}
+
+.dropdown-toggle:hover {
+  color: white; 
+}
+
+.dropdown-menu {
+  background-color: #343a40; 
+}
+
+#navMenuRow{
+  display: none;
+}
+
+/*RESPONSIVE*/
+@media (max-width: 500px) {
+ 
+  #sidebarContainer{
+    display: none;
+  }
+  
+#navMenuRow{
+  display: block;
+}
+
+  .card-text.description {
+    word-wrap: break-word;
+    word-break:break-all;
+    max-width: 220px;
+    width: auto;
+    height: auto;
+    border: 1px solid rgb(203, 203, 203); 
+    padding: 5px;
+    border-radius: 10px;
+  }
+
+  #mainSpaceCol{
+    width: 100%;
+  }
+  
+  
+.navMenu .nav-item{
+  padding: 5px;
+  margin: 1px;
+}
+
+.navMenu{
+  padding: 10px;
+}
+
+#deletebtnOfTask{
+  font-size: 0px;
+}
+
+#editBtnOfTask{
+  font-size: 0px;
+}
+
+#checkBoxSpanOfTask{
+  margin: 0px;
+}
+
+
+#carddescription{
+  display: none; 
+}
+
+.label{
+  font-size: 0px;
+  color: #007bff;
+}
+
+#sidebarIcon{
+  display: none;
+}
+  
+}
+
+label{
+  display: inline-flex;
+}
+
+
+@media (max-width: 400px) {
+.label{
+  font-size: 0px;
+  color: #007bff;
+}
 }

@@ -49,24 +49,26 @@ export default function taskDOM(projectArray) {
 
     const labelContainer = document.createElement('div');
     labelContainer.className = 'label-container d-flex justify-content-between';
-
+    
     const descriptionLabel = document.createElement('span');
     descriptionLabel.className = 'label';
-    descriptionLabel.textContent = 'Description';
-
+    descriptionLabel.innerHTML = `<small class="text-muted"><i class="fa-solid fa-note-sticky"></i> Description</small>`;
+    descriptionLabel.id = 'descriptionLabelTask';
+    
     const dueDateLabel = document.createElement('span');
     dueDateLabel.className = 'label';
-    dueDateLabel.textContent = 'Due Date';
-
+    dueDateLabel.innerHTML = `<small class="text-muted"><i class="fas fa-calendar-day"></i> Due Date</small>`;
+    
     const priorityLabel = document.createElement('span');
     priorityLabel.className = 'label';
-    priorityLabel.textContent = 'Priority';
-
+    priorityLabel.innerHTML = `<small class="text-muted"><i class="fas fa-flag"></i> Priority</small>`;
+    
     labelContainer.appendChild(descriptionLabel);
     labelContainer.appendChild(dueDateLabel);
     labelContainer.appendChild(priorityLabel);
-
+    
     titleContainer.appendChild(labelContainer);
+    
 
     const elementContainer = document.createElement('div');
     elementContainer.className = 'element-container d-flex align-items-center';
@@ -79,6 +81,32 @@ export default function taskDOM(projectArray) {
     description.className = 'col-8 card-text description';
     description.textContent = descriptionText;
     description.id = 'carddescription';
+
+    const viewButton = document.createElement('button');
+    viewButton.classList.add('btn', 'btn-outline-primary', 'view-button', 'd-lg-none', 'd-md-none');
+    viewButton.id = 'viewDescription'
+    viewButton.innerHTML = '<i class="fa-solid fa-eye"></i>';
+
+
+  
+      // viewButton.style.display = 'flex'
+    let isClicked = true
+    viewButton.addEventListener('click', ()=>{
+      description.classList.toggle('d-none');
+      if (isClicked) {
+          viewButton.innerHTML = '<i class="fa-solid fa-eye"></i>';
+          description.style.display = 'none'
+          dueDate.style.display = 'flex'
+          priority.style.display = 'flex'
+
+      } else {
+        description.style.display = 'flex'
+        dueDate.style.display = 'none'
+        priority.style.display = 'none'
+        viewButton.innerHTML = '<i class="fa-solid fa-eye-slash"></i>';
+      }
+      isClicked =!isClicked
+  });
 
     const priority = document.createElement('p');
     priority.className = 'card-text priority';
@@ -104,10 +132,12 @@ export default function taskDOM(projectArray) {
 
     const editButton = document.createElement('button');
     editButton.className = 'btn btn-warning btn-sm m-2';
+    editButton.id = 'editBtnOfTask'
     editButton.innerHTML = '<i class="fas fa-edit"></i> Edit';
 
     const deleteButton = document.createElement('button');
     deleteButton.className = 'btn btn-danger btn-sm';
+    deleteButton.id = 'deletebtnOfTask'
     deleteButton.innerHTML = '<i class="fas fa-trash"></i> Delete';
 
    
@@ -119,6 +149,7 @@ export default function taskDOM(projectArray) {
     const checkboxSpan = document.createElement('span');
     checkboxSpan.className = 'checkbox-span';
     checkboxSpan.style.margin = '10px';
+    checkboxSpan.id = 'checkBoxSpanOfTask'
 
     const checkbox = document.createElement('input');
     checkbox.type = 'checkbox';
@@ -133,6 +164,7 @@ export default function taskDOM(projectArray) {
     
   
     elementContainer.appendChild(description);
+    elementContainer.appendChild(viewButton)
     elementContainer.appendChild(dueDate);
     elementContainer.appendChild(priority);
 

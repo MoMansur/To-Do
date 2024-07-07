@@ -19,14 +19,27 @@ export default class ProjectManager {
 //Methods Below
 
 homePage(){
-  this.getSelectedProjectArray(this.allProjectFolder)
-  this.allTodos()
+
+
+  this.displayer()
+  this.newProjectBtn()
+  
+ 
   title.innerHTML = `Home`
 
+}
+newProjectBtn() {
+  const newProjectBtn = document.createElement('button');
+  newProjectBtn.textContent = 'Add Project';
+  newProjectBtn.id = 'addProject';
+  newProjectBtn.className = 'btn btn-primary';
+  newProjectBtn.style.width = '100%';
+  space.append(newProjectBtn);
 }
    allTodos(){
     space.innerHTML = ""
     title.innerText = 'All My Todos'
+    
    
     this.allProjectFolder.forEach(todo =>{
       const allTodosVar = todo.project
