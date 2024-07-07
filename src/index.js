@@ -2,12 +2,13 @@ import ProjectManager from "./projectManager.js";
 
 // Initialize ProjectManager
 const myProjectManager = new ProjectManager();
-myProjectManager.displayer()
+myProjectManager.displayer();
 
 // Export function to access ProjectManager
 export const theManager = () => myProjectManager;
 
-// Selecting elements by ID
+
+// // Selecting elements by ID
 const taskSpace = document.getElementById('taskSpace');
 const addTaskButton = document.querySelectorAll('.addtasksidebar');
 const allTodosItem = document.querySelectorAll('.allTodos');
@@ -75,19 +76,5 @@ sidebarIcon.addEventListener('click', () => {
 
 
 
-// Dropdown toggle functionality
-document.addEventListener('DOMContentLoaded', function() {
-  const dropdownToggle = document.getElementById('dropdownMenuButton');
-  const dropdownMenu = document.querySelector('.dropdown-menu');
 
-  dropdownToggle.addEventListener('click', function() {
-      dropdownMenu.classList.toggle('show');
-  });
-
-  document.addEventListener('click', function(event) {
-      if (!dropdownToggle.contains(event.target) && !dropdownMenu.contains(event.target)) {
-          dropdownMenu.classList.remove('show');
-      }
-  });
-});
 

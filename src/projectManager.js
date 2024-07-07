@@ -1,11 +1,10 @@
 import Project from "./project.js";
 import modal from "./projectDom.js";
 import { loadProjectsFromLocalStorage, saveProjectsToLocalStorage } from './localStorage.js';
-import newTaskFormDOM from "./taskForm.js";
 
+const taskSpace = document.getElementById('taskSpace')
 const space = document.getElementById('space');
-
-
+const title = document.getElementById('title')
 
 export default class ProjectManager {
   constructor() {
@@ -15,11 +14,17 @@ export default class ProjectManager {
     if (this.allProjectFolder.length === 0) {
     this.addNewProject(0,  'Default', 'black',)
     }
+
     console.log(this.allProjectFolder);
   }
 //Methods Below
 
+userData(){
+
+}
+
 homePage(){
+  space.style.backgroundColor = '#cedbe9'
   title.innerHTML = `Home`
   this.displayer()
  
@@ -41,7 +46,7 @@ homePage(){
 
   completedTask() {
     space.innerHTML = "";
-    title.innerText = 'All My Completed Tasks';
+    title.innerText = 'Completed Tasks';
     
     let completedTasksFound = false;
   
@@ -64,7 +69,7 @@ homePage(){
   }
   pendingTodo() {
     space.innerHTML = "";
-    title.innerText = 'All My Pending Tasks';
+    title.innerText = 'Pending Tasks';
   
     const today = new Date();
   
@@ -90,7 +95,6 @@ homePage(){
     }
   }
   
-
   todayTodos() {
     const today = new Date();
     const options = {
@@ -117,7 +121,7 @@ homePage(){
 
   missedTasks(){
     space.innerHTML = "";
-  title.innerText = 'All My Missed Tasks';
+  title.innerText = 'Missed Tasks';
   const today = new Date();
 
   const missedTasks = [];
@@ -128,6 +132,7 @@ homePage(){
 
       if (task.isCompleted === false && today > dueDate) {
         missedTasks.push(task);
+        title.style.backgroundColor = 'red'
       }
     });
   });
@@ -160,6 +165,8 @@ homePage(){
   displayer() {
     space.innerHTML = "";
     title.innerHTML = `Home`
+
+    space.style.backgroundColor = ''
     this.projectPageandSideBarDOM(this.allProjectFolder);
     this.newProjectBtn()
     this.footer()
@@ -222,43 +229,38 @@ homePage(){
   }
 
   projectPageandSideBarDOM(projects) {
-    const newProjectUL = document.getElementById('newProjectUL');
-    newProjectUL.innerHTML = "";
-    space.innerHTML = "";
+  const newProjectUL = document.getElementById('newProjectUL');
 
-    newProjectUL.innerHTML = "";
+  newProjectUL.innerHTML = "";
   space.innerHTML = "";
-
   title.innerText = 'My Projects';
 
   projects.forEach((project, index) => {
     // Sidebar Project List
     const listItem = document.createElement('li');
-listItem.className = 'list-group-item';
-listItem.id = 'projectFolder';
-listItem.setAttribute('data-index', index);
+    listItem.className = 'list-group-item';
+    listItem.id = 'projectFolder';
+    listItem.setAttribute('data-index', index);
 
-const icon = document.createElement('i');
-icon.className = 'fa-solid fa-folder project-icon'; // Use folder icon
-icon.style.color = project.color; // Set icon color to project color
-// icon.style.fontWeight = '500';
+    const icon = document.createElement('i');
+    icon.className = 'fa-solid fa-folder project-icon'; 
 
 
 
-const projectName = document.createElement('span');
-projectName.className = 'project-name';
-projectName.textContent = project.name;
+    const projectName = document.createElement('span');
+    projectName.className = 'project-name';
+    projectName.textContent = project.name;
 
-listItem.append(icon);
-listItem.append(projectName);
+    listItem.append(icon);
+    listItem.append(projectName);
 
 
-listItem.style.backgroundColor = 'White';
-listItem.addEventListener('click', () => {
-  let getProjectArray = project.project;
-  Project.prototype.displayer(getProjectArray);
-  title.innerText = project.name;
-});
+    listItem.style.backgroundColor = 'White';
+    listItem.addEventListener('click', () => {
+      let getProjectArray = project.project;
+      Project.prototype.displayer(getProjectArray);
+      title.innerText = project.name;
+    });
 
 newProjectUL.append(listItem);
 

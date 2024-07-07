@@ -28,8 +28,7 @@ export default class Task {
   
   deleteTask(project, index) {
     const comfirm = confirm('Are you sure you want to delete this Task?')
-    const projects = JSON.parse(localStorage.getItem('projects')) || [];
-      
+    const projects = JSON.parse(localStorage.getItem('projects')) || []; 
     if(comfirm){
       project.splice(index, 1);
       localStorage.setItem('projects', JSON.stringify(projects));
@@ -38,7 +37,7 @@ export default class Task {
   }
 
 
-  editTask(task, index, card) {
+  editTask(task) {
     const formContainer = newTaskFormDOM([]);
     space.appendChild(formContainer);
   
@@ -55,18 +54,13 @@ export default class Task {
   
     form.addEventListener('submit', (e) => {
       e.preventDefault();
-  
       task.title = titleInput.value;
       task.description = descriptionInput.value;
       task.dueDate = this.formatDateToDMY(dueDateInput.value);
       task.priority = prioritySelect.value;
-  
       const projects = JSON.parse(localStorage.getItem('projects')) || [];
-    
       localStorage.setItem('projects', JSON.stringify(projects));
-
       theManager().saveProjects()
-
       // theManager().refresher(task)
       formContainer.style.display = 'none';
     });

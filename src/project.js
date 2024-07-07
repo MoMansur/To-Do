@@ -1,8 +1,6 @@
 import taskDOM from "./todoDOM.js";
 import newTaskFormDOM from "./taskForm.js";
 
-import ProjectManager from "./projectManager.js";
-
 const space = document.getElementById('space');
 const title = document.getElementById('title');
 
@@ -22,10 +20,9 @@ export default class Project {
   displayer(array) {
     space.innerHTML = "";
     taskDOM(array)
-    this.dom(array.name);
+    this.dom();
     newTaskFormDOM(array)
     this.newTaskFormBtn(array)
-    return array;
   }
 
 
@@ -44,7 +41,6 @@ export default class Project {
     addTaskButton.id = 'addTaskButton';
     addTaskButton.className = 'btn btn-secondary';
     addTaskButton.style.width = '100%';
-    //<i class="fa-solid fa-circle-plus"></i>
     space.append(addTaskButton);
   }
 
