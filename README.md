@@ -4,7 +4,7 @@
 This web application allows users to manage their tasks and projects effectively. It provides functionality to create, edit, delete tasks and projects, mark tasks as completed, and organize tasks by projects.
 
 ## Features
-- **User Authentication and Customization**
+- **User and Customization**
   - Users can set their username which is stored locally.
   - Projects can be created with customizable names and colors.
 
