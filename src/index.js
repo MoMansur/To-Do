@@ -57,6 +57,7 @@ missedItem.forEach(menu => menu.addEventListener('click', () => {
   myProjectManager.missedTasks()
 }));
 
+let isClicked = true
 sidebarIcon.addEventListener('click', () => {
   if (isClicked) {
     sidebarContainer.style.display = 'none';
