@@ -5,8 +5,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack serve --open --config webpack.dev.js",
-    "build": "webpack",
-    "watch": "webpack --watch",
+  "build": "webpack --config webpack.prod.js",
+  "watch": "webpack --watch --config webpack.dev.js",
     "gitScript": "git subtree push --prefix dist origin gh-pages"
   },
   "repository": {
@@ -18,7 +18,7 @@
   "bugs": {
     "url": "https://github.com/MoMansur/To-Do/issues"
   },
-  "homepage": "https://github.com/MoMansur/To-Do#readme",
+  "homepage": "https://github.com/MoMansur/To-Do/dist/index.html",
   "description": "",
   "devDependencies": {
     "@babel/core": "^7.24.7",
