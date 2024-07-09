@@ -1,0 +1,91 @@
+
+
+/* Styling for the project list and cards */
+#newProjectUL {
+  list-style-type: none;
+  padding: 0;
+}
+
+.project-card {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 10px;
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.project-card-icon {
+  color: #007bff;
+  font-size: 2rem;
+  margin-right: 10px;
+}
+
+.project-card-title {
+  flex-grow: 1;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.delete-icon {
+  color: #dc3545;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.delete-icon:hover {
+  color: #ff0000;
+}
+
+
+/* Style for the folder-like list item */
+/* Style for the folder-like list item */
+.list-group-item {
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 15px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+
+.list-group-item:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.project-icon {
+  font-size: 1.5rem;
+  margin-right: 10px;
+  transition: color 0.3s ease;
+}
+
+.project-delete-icon {
+  margin-left: auto;
+  color: red;
+  cursor: pointer;
+}
+
+.project-name {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+#deleteProject:hover{
+  background-color: rgb(136, 0, 0);
+  border-radius: 5px;
+}

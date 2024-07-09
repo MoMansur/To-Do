@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Todo-list</title>
-    <link rel="stylesheet" href="./style.css"> 
+    <link rel="stylesheet" href="./css/style.css"> 
     <link rel="stylesheet" href="./css/projectDOM.css">
     <link rel="stylesheet" href="./css/task.css">
-
     <link rel="stylesheet" href="../node_modules/@fortawesome/fontawesome-free/css/all.min.css"> 
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
-    <script defer src="index.js"></script>
-<script defer src="index.bundle.js"></script><script defer src="project.bundle.js"></script></head>
+    
+    <script defer src="main.js"></script>
+</head>
 <body>
     <nav class="navbar navbar-primary bg-primary">
         <div class="container-fluid" style="padding: 12px;">
@@ -19,7 +19,6 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <h1 class="NavText text-center flex-grow-1">Todo List</h1>
-            
             <div class="iconUsername" id="iconUsername">
                 <div class="user-avatar">
                     <i class="fas fa-user"></i>
@@ -28,8 +27,6 @@
             </div>
         </div>
     </nav>
-    
-    
     <div class="container-fluid" id="container">
         <div class="row">
           <div class="sidebar col-2 bg-primary" id="sidebarContainer">
@@ -47,7 +44,7 @@
                       <li class="nav-item CompletedTodo list-group-item" id="CompletedTodo">
                           <i class="fa-solid fa-circle-check"></i> Completed
                       </li>
-                      <li class="nav-item  UpcomingTodo list-group-item" id="UpcomingTodo">
+                      <li class="nav-item UpcomingTodo list-group-item" id="UpcomingTodo">
                           <i class="fa-solid fa-hourglass-half"></i> Upcoming
                       </li>
                       <li class="nav-item MissedTodo list-group-item" id="MissedTodo">
@@ -55,7 +52,6 @@
                       </li>
                   </ul>
               </div>
-
               <div class="projectItems">
                   <h2>My projects</h2>
                   <button class="btn btn-success" id="createNewProject">
@@ -107,18 +103,15 @@
                         <div id="errorMessage" class="text-danger"></div>
                         <button type="submit" id="nameSubmitBtn" class="btn btn-primary">Submit</button>
                       </form>
-                      
                       <button id="addProject" class="btn btn-primary" style="width: 100%;">
                         Add Project
                       </button>
-                      
                   </div>
               </div>
           </div>
       </div>
   </div>
 
-  <script type="module" src="index.js"></script>
-  <script src="path/to/bootstrap.bundle.min.js"></script>
+ 
 </body>
 </html>
