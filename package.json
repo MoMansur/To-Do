@@ -18,7 +18,7 @@
   "bugs": {
     "url": "https://github.com/MoMansur/To-Do/issues"
   },
-  "homepage": "https://github.com/MoMansur/To-Do#readme",
+  "homepage": "https://github.com/MoMansur/To-Do/dist/index.html",
   "description": "",
   "devDependencies": {
     "@babel/core": "^7.24.7",
