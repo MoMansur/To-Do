@@ -3,15 +3,13 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   mode: 'development',
-  entry: {
-    index: './src/index.js',
-    project: './src/project.js',
-  },
-  output: {
-    filename: '[name].bundle.js', // Use [name] placeholder for dynamic filenames
-    path: path.resolve(__dirname, 'dist'),
-    clean: true,
-  },
+  entry: './src/index.js',
+    output: {
+        path: path.resolve(__dirname, 'dist'), // Output directory
+        filename: 'index.js', // Output filename
+        publicPath: '/',
+        clean: true
+    },
   devtool: 'inline-source-map',
   plugins: [
     new HtmlWebpackPlugin({
