@@ -2,6 +2,7 @@ import ProjectManager from "./projectManager.js";
 import newTaskFormDOM from "./taskForm.js";
 
 import { theManager } from "./index.js";
+import Project from "./project.js";
 const space = document.getElementById('space')
 
 export default class Task {
@@ -37,7 +38,7 @@ export default class Task {
   }
 
 
-  editTask(task) {
+  editTask(task, selectArray) {
     const formContainer = newTaskFormDOM([]);
     space.appendChild(formContainer);
   
@@ -47,30 +48,41 @@ export default class Task {
     const dueDateInput = form.querySelector('#projectDueDate');
     const prioritySelect = form.querySelector('#projectPriority');
   
+    // Pre-fill the form with the current task values
     titleInput.value = task.title;
     descriptionInput.value = task.description;
-    dueDateInput.value = task.dueDate;
+    dueDateInput.value = this.formatDateToDMY(task.dueDate);
     prioritySelect.value = task.priority;
   
     form.addEventListener('submit', (e) => {
       e.preventDefault();
+  
       task.title = titleInput.value;
       task.description = descriptionInput.value;
-      task.dueDate = this.formatDateToDMY(dueDateInput.value);
+  
+      if (dueDateInput.value) {
+        task.dueDate = this.formatDateToDMY(dueDateInput.value);
+      }
+  
+   
       task.priority = prioritySelect.value;
-      const projects = JSON.parse(localStorage.getItem('projects')) || [];
+        const projects = JSON.parse(localStorage.getItem('projects')) || [];
       localStorage.setItem('projects', JSON.stringify(projects));
-      theManager().saveProjects()
-      // theManager().refresher(task)
+
+      theManager().saveProjects();
+      Project.prototype.displayer(selectArray)
+    
+      // Hide the form container
       formContainer.style.display = 'none';
     });
+
     formContainer.style.display = 'block';
   }
+  
 
   formatDateToDMY(date) {
     const [year, month, day] = date.split('-'); // Assuming the date is initially in 'year-month-day' format
     const dateObject = new Date(year, month - 1, day); // Create a Date object
-    
     const dayName = dateObject.toLocaleDateString('en-US', { weekday: 'long' }); // Get the day name
     const formattedDate = `${day}/${month}/${year}`;
     

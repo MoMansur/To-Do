@@ -191,7 +191,7 @@ export default function taskDOM(projectArray) {
  
 
     editButton.addEventListener('click', () => {
-      Task.prototype.editTask(task, index, 0, card);
+      Task.prototype.editTask(task,projectArray );
     });
 
     

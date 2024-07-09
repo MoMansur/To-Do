@@ -1,4 +1,5 @@
 import { theManager } from "./index.js";
+import Project from "./project.js";
 import Task from "./todo.js";
 const space = document.getElementById('space');
 
@@ -95,9 +96,8 @@ export default function newTaskFormDOM(selectArray) {
 
     form.addEventListener('submit', (e) => {
         function formatDateToDMY(date) {
-            const [year, month, day] = date.split('-'); // Assuming the date is initially in 'year-month-day' format
-            const dateObject = new Date(year, month - 1, day); // Create a Date object
-            
+            const [year, month, day] = date.split('-'); 
+            const dateObject = new Date(year, month - 1, day); 
             const dayName = dateObject.toLocaleDateString('en-US', { weekday: 'long' }); // Get the day name
             const formattedDate = `${day}/${month}/${year}`;
             
@@ -122,7 +122,7 @@ export default function newTaskFormDOM(selectArray) {
         const newTask = new Task(title, description, formatDateToDMY(dueDate), priority, false);
 
         selectArray.push(newTask);
-        theManager().refresher(selectArray);
+        Project.prototype.displayer(selectArray)
         
         formContainer.style.display = 'none'; // Hide the form after submission
     });

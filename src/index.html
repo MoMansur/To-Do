@@ -20,11 +20,11 @@
             </button>
             <h1 class="NavText text-center flex-grow-1">Todo List</h1>
             
-            <div class="iconUsername">
+            <div class="iconUsername" id="iconUsername">
                 <div class="user-avatar">
                     <i class="fas fa-user"></i>
                 </div>
-                <span class="user-name" id="userName">User</span>
+                <span class="user-name" id="navUserName">User</span>
             </div>
         </div>
     </nav>
@@ -62,9 +62,7 @@
                       <i class="fa-solid fa-circle-plus"></i> Create new project
                   </button>
                   <ul class="projectUL list-group" id="newProjectUL">
-                      <li class="list-group-item">
-                          <i class="fa-solid fa-hashtag"></i> Outdoor plans
-                      </li>
+                      
                   </ul>
               </div>
           </div>
@@ -103,6 +101,17 @@
                   <h2 id="title" style="margin: 10px;">My Todos Project</h2>
                   <div id="space" style="padding: 20px;width: 100%; border: 1px solid #ccc; border-radius: 5px;">
                       <!-- Task content will be loaded here -->
+                      <form class="form-container" id="nameForm">
+                        <label for="userName">Enter your name:</label>
+                        <input type="text" id="userName" class="form-control" placeholder="Your name...">
+                        <div id="errorMessage" class="text-danger"></div>
+                        <button type="submit" id="nameSubmitBtn" class="btn btn-primary">Submit</button>
+                      </form>
+                      
+                      <button id="addProject" class="btn btn-primary" style="width: 100%;">
+                        Add Project
+                      </button>
+                      
                   </div>
               </div>
           </div>

@@ -2,15 +2,17 @@ import ProjectManager from "./projectManager.js";
 
 // Initialize ProjectManager
 const myProjectManager = new ProjectManager();
-myProjectManager.displayer();
+if (myProjectManager.allProjectFolder.length >= 1) {
+  myProjectManager.displayer()
+}
 
 // Export function to access ProjectManager
 export const theManager = () => myProjectManager;
 
 
+
 // // Selecting elements by ID
 const taskSpace = document.getElementById('taskSpace');
-const addTaskButton = document.querySelectorAll('.addtasksidebar');
 const allTodosItem = document.querySelectorAll('.allTodos');
 const todayItem = document.querySelectorAll('.TodayTodos');
 const completedItem = document.querySelectorAll('.CompletedTodo');
@@ -22,12 +24,7 @@ const sidebarContainer = document.getElementById('sidebarContainer');
 const sidebarIcon = document.getElementById('sidebarIcon');
 const mainSpaceCol = document.getElementById('mainSpaceCol');
 const navMenuRow = document.getElementById('navMenuRow');
-const theNavListUl = document.getElementById('theNavListUl');
-const settingsDropdown = document.getElementById('settingDropdown');
-const settingsIcon = document.getElementById('settingsIcon');
-const userName = document.getElementById('userName');
 
-let isClicked = true;
 
 // Event Listeners
 homePage.forEach(menu => menu.addEventListener('click', () => {
