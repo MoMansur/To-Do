@@ -122,3 +122,12 @@
   }
   
   
+
+@media (max-width: 576px) {
+    #formContainer{
+      width: 100%;
+    }
+    
+
+}
+

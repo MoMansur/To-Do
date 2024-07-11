@@ -185,6 +185,10 @@ li {
     /* padding: 5px; */
     margin: 1px;
   }
+  .navMenu .list-group-item{
+    padding: 5px;
+    margin: 0px;
+  }
 
   .navMenu {
     padding: 10px;
