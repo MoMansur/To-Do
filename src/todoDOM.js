@@ -1,5 +1,3 @@
-import Project from "./project.js";
-import ProjectManager from "./projectManager.js";
 import Task from "./todo.js";
 
 export default function taskDOM(projectArray) {
@@ -21,7 +19,7 @@ export default function taskDOM(projectArray) {
 
     const priorityBar = document.createElement('div');
     priorityBar.className = 'priority-bar';
-    switch (priorityText.toLowerCase()) {
+    switch (priorityText) {
       case 'low':
         priorityBar.style.backgroundColor = '#28a745';
         break;
@@ -91,6 +89,8 @@ export default function taskDOM(projectArray) {
   
       // viewButton.style.display = 'flex'
     let isClicked = true
+
+
     viewButton.addEventListener('click', ()=>{
       description.classList.toggle('d-none');
       if (isClicked) {
@@ -194,10 +194,7 @@ export default function taskDOM(projectArray) {
       Task.prototype.editTask(task,projectArray );
     });
 
-    
-  ///////////////////////
-
-  if (task.isCompleted) {
+  if (isCompleted) {
     checkbox.checked = true;
     statusText.textContent = 'Completed';
     checkboxSpan.style.backgroundColor = 'green';
@@ -213,9 +210,6 @@ export default function taskDOM(projectArray) {
 }
 
   checkbox.addEventListener('change', () => {
- 
-
-
     if (checkbox.checked) {
       statusText.textContent = 'Completed';
       checkboxSpan.style.backgroundColor = 'green'
@@ -242,6 +236,5 @@ export default function taskDOM(projectArray) {
 
   });
 }
-
 
 
