@@ -1,5 +1,5 @@
 import Project from "./project.js";
-import modal from "./projectDom.js";
+import modal from "./projectDOM.js";
 import { loadProjectsFromLocalStorage, saveProjectsToLocalStorage } from './localStorage.js';
 
 const taskSpace = document.getElementById('taskSpace');
