@@ -1,5 +1,4 @@
 import newTaskFormDOM from "./taskForm.js";
-
 import { theManager } from "./index.js";
 import Project from "./project.js";
 const space = document.getElementById('space')

@@ -127,7 +127,9 @@
     #formContainer{
       width: 100%;
     }
-    
+    #carddescription{
+      display: none;
+    }
 
 }
 

@@ -1,4 +1,3 @@
-
 import ProjectManager from "./projectManager.js";
 
 // Initialize ProjectManager
@@ -9,8 +8,6 @@ if (myProjectManager.allProjectFolder.length >= 1) {
 
 // Export function to access ProjectManager
 export const theManager = () => myProjectManager;
-
-
 
 // // Selecting elements by ID
 const taskSpace = document.getElementById('taskSpace');

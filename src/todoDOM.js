@@ -73,8 +73,6 @@ export default function taskDOM(projectArray) {
     elementContainer.id = 'elementContainer';
 
    
-
-
     const description = document.createElement('span');
     description.className = 'col-8 card-text description';
     description.textContent = descriptionText;
@@ -86,28 +84,23 @@ export default function taskDOM(projectArray) {
     viewButton.innerHTML = '<i class="fa-solid fa-eye"></i>';
 
 
-  
-      // viewButton.style.display = 'flex'
-    let isClicked = true
+    let clickCount = 0;
 
-
-    viewButton.addEventListener('click', ()=>{
-      description.classList.toggle('d-none');
-      if (isClicked) {
-          viewButton.innerHTML = '<i class="fa-solid fa-eye"></i>';
-          description.style.display = 'none'
-          dueDate.style.display = 'flex'
-          priority.style.display = 'flex'
-
-      } else {
-        description.style.display = 'flex'
-        dueDate.style.display = 'none'
-        priority.style.display = 'none'
+    viewButton.addEventListener('click', () => {
+      clickCount++;
+      if (clickCount % 2 === 1) {
+        description.style.display = 'flex';
+        dueDate.style.display = 'none';
+        priority.style.display = 'none';
         viewButton.innerHTML = '<i class="fa-solid fa-eye-slash"></i>';
+      } else {
+        description.style.display = 'none';
+        dueDate.style.display = 'flex';
+        priority.style.display = 'flex';
+        viewButton.innerHTML = '<i class="fa-solid fa-eye"></i>';
       }
-      isClicked =!isClicked
-  });
-
+    });
+    
     const priority = document.createElement('p');
     priority.className = 'card-text priority';
     priority.innerHTML = `<small class="text-muted"><i class="fas fa-flag"></i> ${priorityText}</small>`;
@@ -126,7 +119,7 @@ export default function taskDOM(projectArray) {
     const buttonContainer = document.createElement('div');
     buttonContainer.className = 'd-flex align-items-center p-2';
     buttonContainer.id = 'buttonContainer';
-
+    buttonContainer.style.padding = '10px';
     const buttonGroup = document.createElement('div');
     buttonGroup.style.margin = '10px';
 
@@ -139,12 +132,6 @@ export default function taskDOM(projectArray) {
     deleteButton.className = 'btn btn-danger btn-sm';
     deleteButton.id = 'deletebtnOfTask'
     deleteButton.innerHTML = '<i class="fas fa-trash"></i> Delete';
-
-   
-    
-
-
-    buttonContainer.style.padding = '10px';
 
     const checkboxSpan = document.createElement('span');
     checkboxSpan.className = 'checkbox-span';
@@ -159,25 +146,18 @@ export default function taskDOM(projectArray) {
     const statusText = document.createElement('span');
     statusText.className = 'status-text';
   
-
-
-    
-  
+    //APPENDER
     elementContainer.appendChild(description);
     elementContainer.appendChild(viewButton)
     elementContainer.appendChild(dueDate);
     elementContainer.appendChild(priority);
 
-       
     checkboxSpan.appendChild(checkbox);
     checkboxSpan.appendChild(statusText);
     buttonContainer.appendChild(checkboxSpan);
 
-
-
     buttonGroup.appendChild(editButton);
     buttonGroup.appendChild(deleteButton);
-
     buttonContainer.appendChild(buttonGroup);
 
     row.appendChild(titleContainer);
@@ -185,13 +165,10 @@ export default function taskDOM(projectArray) {
     row.appendChild(buttonContainer);
 
     card.appendChild(row);
-
     space.appendChild(card);
 
- 
-
     editButton.addEventListener('click', () => {
-      Task.prototype.editTask(task,projectArray );
+      Task.prototype.editTask(task, projectArray);
     });
 
   if (isCompleted) {
@@ -227,7 +204,6 @@ export default function taskDOM(projectArray) {
       Task.prototype.statusChange(task, false)
     }
   });
-
 
   deleteButton.addEventListener('click', () => {
     Task.prototype.deleteTask(projectArray, index, task);

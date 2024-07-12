@@ -81,13 +81,7 @@ const modal = (function() {
     });
   
     saveButton.addEventListener('click', () => {
-      const projectName = nameInput.value;
-      const projectColor = colorSelect.value;
       closeModal();
-  
-     
-   
-  
     });
   
    
